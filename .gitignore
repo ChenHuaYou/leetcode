@@ -1,5 +1,7 @@
 # Prerequisites
 *.d
+core
+CMakeFiles/
 
 # Compiled Object files
 *.slo
