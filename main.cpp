@@ -114,7 +114,7 @@ public:
 	}  
 };
 
-class Solution {
+class Solution3 {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
         map<int,int> mymap;
@@ -136,6 +136,42 @@ public:
     }
 };
 
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        map<char,int> mymap;
+        int count = 0, maxv = 0;
+        for(int i=0; i<s.size(); i++){
+            int j = mymap[s[i]];
+            if(j==0){
+                mymap[s[i]] = i+1;
+				count ++;
+            }else{
+				mymap.clear();
+				mymap[s[i]] = i+1;
+				if (count>maxv) maxv = count;
+				count = 1;
+            }
+        }
+        return maxv;
+    }
+};
+
+
 int main(){
 	Solution s;
+	string ss = "pwwkew";
+	cout << ss << "\n";
+	cout << s.lengthOfLongestSubstring(ss) << endl;
+
+	ss = "bbbbb";
+	cout << ss << "\n";
+	cout << s.lengthOfLongestSubstring(ss) << endl;
+
+
+	ss = "abcabcbb";
+	cout << ss << "\n";
+	cout << s.lengthOfLongestSubstring(ss) << endl;
+
+
 }
