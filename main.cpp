@@ -115,63 +115,65 @@ public:
 };
 
 class Solution3 {
-public:
-    vector<int> twoSum(vector<int>& nums, int target) {
-        map<int,int> mymap;
-        vector<int> res;
-        int n = nums.size();
-        for(int i=0;i<n;i++){
-            mymap[nums[i]] = i+1;
-        }
-        for(int i=0;i<n;i++){
-            int other = target - nums[i];
-            int other_index = mymap[other];
-            if (other_index!=0 && other_index-1 != i){
-                res.push_back(i);
-                res.push_back(other_index-1); 
-                break;
+    public:
+        vector<int> twoSum(vector<int>& nums, int target) {
+            map<int,int> mymap;
+            vector<int> res;
+            int n = nums.size();
+            for(int i=0;i<n;i++){
+                mymap[nums[i]] = i+1;
             }
+            for(int i=0;i<n;i++){
+                int other = target - nums[i];
+                int other_index = mymap[other];
+                if (other_index!=0 && other_index-1 != i){
+                    res.push_back(i);
+                    res.push_back(other_index-1); 
+                    break;
+                }
+            }
+            return res;
         }
-        return res;
-    }
 };
 
 class Solution {
-public:
-    int lengthOfLongestSubstring(string s) {
-        map<char,int> mymap;
-        int count = 0, maxv = 0;
-        for(int i=0; i<s.size(); i++){
-            int j = mymap[s[i]];
-            if(j==0){
+    public:
+        int lengthOfLongestSubstring(string s) {
+            map<char,int> mymap;
+            int count = 0, maxv = 0, start=0;
+            for(int i=0; i<s.size(); i++){
+                int j = mymap[s[i]];
                 mymap[s[i]] = i+1;
-				count ++;
-            }else{
-				mymap.clear();
-				mymap[s[i]] = i+1;
-				if (count>maxv) maxv = count;
-				count = 1;
+                if(j==0){
+                    count ++;
+                }else{
+                    start = max(j, start);
+                    count = i + 1 - start;
+                }
+                if(count>maxv) maxv=count;
             }
+            return maxv;
         }
-        return maxv;
-    }
 };
 
 
 int main(){
 	Solution s;
-	string ss = "pwwkew";
+	string ss = "zwnigfunjwz";
+    //ss = "abba";
+//	cout << ss << "\n";
+//	cout << s.lengthOfLongestSubstring(ss) << endl;
+//
+//	ss = "bbbbb";
+//	cout << ss << "\n";
+//	cout << s.lengthOfLongestSubstring(ss) << endl;
+//
+//
+//	ss = "abcabcbb";
+//	cout << ss << "\n";
+//	cout << s.lengthOfLongestSubstring(ss) << endl;
+
 	cout << ss << "\n";
 	cout << s.lengthOfLongestSubstring(ss) << endl;
-
-	ss = "bbbbb";
-	cout << ss << "\n";
-	cout << s.lengthOfLongestSubstring(ss) << endl;
-
-
-	ss = "abcabcbb";
-	cout << ss << "\n";
-	cout << s.lengthOfLongestSubstring(ss) << endl;
-
 
 }
