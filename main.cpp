@@ -7,6 +7,7 @@
 #include <math.h>
 #include <memory>
 #include <stdlib.h>
+#include <map>
 
 
 
@@ -48,7 +49,7 @@ struct ListNode {
 	ListNode(int x) : val(x), next(nullptr) {}
 	ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
-class Solution {
+class Solution2 {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
 		int a = 0;
@@ -112,7 +113,29 @@ public:
 		return h;
 	}  
 };
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        map<int,int> mymap;
+        vector<int> res;
+        int n = nums.size();
+        for(int i=0;i<n;i++){
+            mymap[nums[i]] = i+1;
+        }
+        for(int i=0;i<n;i++){
+            int other = target - nums[i];
+            int other_index = mymap[other];
+            if (other_index!=0 && other_index-1 != i){
+                res.push_back(i);
+                res.push_back(other_index-1); 
+                break;
+            }
+        }
+        return res;
+    }
+};
+
 int main(){
 	Solution s;
-	cout << s.node2num(s.addTwoNumbers(s.num2node("9999999"),s.num2node("9999"))) << endl;
 }
