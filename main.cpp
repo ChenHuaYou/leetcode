@@ -136,7 +136,7 @@ class Solution3 {
         }
 };
 
-class Solution {
+class Solution4 {
     public:
         int lengthOfLongestSubstring(string s) {
             map<char,int> mymap;
@@ -156,24 +156,47 @@ class Solution {
         }
 };
 
+class Solution {
+public:
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+        int p=0, q=0;
+        int left=0, right=0;
+        vector<int> new_nums;
+        double res = 0;
+        while(true){
+            if(p==nums1.size()){
+               left = 1e6; 
+            }else{
+                left = nums1[p];
+            }
+            if(q==nums2.size()){
+               right = 1e6; 
+            }else{
+                right = nums2[q];
+            }
+            if(p==nums1.size() && q==nums2.size()){
+                break;
+            }
+            if (left>right){
+                new_nums.push_back(right);
+                if(q!=nums2.size()) q++;
+            }else{
+                new_nums.push_back(left);
+                if(p!=nums1.size()) p++;
+            }
+        }
+        if(new_nums.size()%2==0){
+            res = ((double)new_nums[new_nums.size()/2-1]+(double)new_nums[new_nums.size()/2])/2;
+        }else{
+            res = (double)new_nums[new_nums.size()/2];
+        }
+        return res;
+    }
+};
 
 int main(){
 	Solution s;
-	string ss = "zwnigfunjwz";
-    //ss = "abba";
-//	cout << ss << "\n";
-//	cout << s.lengthOfLongestSubstring(ss) << endl;
-//
-//	ss = "bbbbb";
-//	cout << ss << "\n";
-//	cout << s.lengthOfLongestSubstring(ss) << endl;
-//
-//
-//	ss = "abcabcbb";
-//	cout << ss << "\n";
-//	cout << s.lengthOfLongestSubstring(ss) << endl;
-
-	cout << ss << "\n";
-	cout << s.lengthOfLongestSubstring(ss) << endl;
-
+    vector<int> nums1 = {2};
+    vector<int> nums2 = {};
+	cout << s.findMedianSortedArrays(nums1,nums2) << endl;
 }
