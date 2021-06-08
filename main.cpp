@@ -156,7 +156,7 @@ class Solution4 {
         }
 };
 
-class Solution {
+class Solution5 {
 public:
     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
         int p=0, q=0;
@@ -194,9 +194,38 @@ public:
     }
 };
 
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        string new_s ="";
+        string res="";
+        for(int i=0; i<s.size(); i++){
+            if (i==0){
+                new_s.push_back('^');
+            }else{
+                new_s.push_back('#');
+            }
+            new_s.push_back(s[i]);
+        }
+        new_s.push_back('$');
+
+        vector<int> P;
+
+        for(int i=0; i<new_s.size(); i++){
+           if()
+        }
+        
+        return res;
+    }
+};
+
 int main(){
 	Solution s;
-    vector<int> nums1 = {2};
-    vector<int> nums2 = {};
-	cout << s.findMedianSortedArrays(nums1,nums2) << endl;
+    vector<string> inputs;
+
+    inputs = {"babad","cbbd","a","ac","aacabdkacaa"};
+    for(int i=0; i<inputs.size();i++){
+        cout << s.longestPalindrome(inputs[i]) << endl;
+    }
+
 }
