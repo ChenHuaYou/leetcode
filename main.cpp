@@ -8,6 +8,7 @@
 #include <memory>
 #include <stdlib.h>
 #include <map>
+#include <regex>
 
 
 
@@ -185,38 +186,64 @@ public:
                 if(p!=nums1.size()) p++;
             }
         }
-        if(new_nums.size()%2==0){
-            res = ((double)new_nums[new_nums.size()/2-1]+(double)new_nums[new_nums.size()/2])/2;
-        }else{
-            res = (double)new_nums[new_nums.size()/2];
-        }
-        return res;
-    }
+		if(new_nums.size()%2==0){
+			res = ((double)new_nums[new_nums.size()/2-1]+(double)new_nums[new_nums.size()/2])/2;
+		}else{
+			res = (double)new_nums[new_nums.size()/2];
+		}
+		return res;
+	}
 };
 
 class Solution {
-public:
-    string longestPalindrome(string s) {
-        string new_s ="";
-        string res="";
-        for(int i=0; i<s.size(); i++){
-            if (i==0){
-                new_s.push_back('^');
-            }else{
-                new_s.push_back('#');
+    public:
+        string longestPalindrome(string s) {
+            string ss ="";
+            for(int i=0; i<s.size(); i++){
+                if (i==0){
+                    ss.push_back('^');
+                }else{
+                    ss.push_back('#');
+                }
+                ss.push_back(s[i]);
             }
-            new_s.push_back(s[i]);
+            ss.push_back('$');
+            int* P = new int[ss.size()];
+            int L = 0;
+            int R = -1;
+            for (int i=0; i<ss.size(); i++){
+                P[i] = 0;
+                if(i<=R){
+                    P[i] = min(P[L+R-i],R-i);
+                }
+                int left = i-P[i]-1;
+                int right = i+P[i]+1;
+                while(left>=0 && right<ss.size() && ss[left]==ss[right]){
+                    P[i] ++;
+                    left --;
+                    right ++;
+                }
+                if(i+P[i]>R){
+                    L = i-P[i];
+                    R = i+P[i];
+                }
+            }
+            int c = 0;
+            int radius = 0;
+            for(int i=0; i<ss.size(); i++){
+                cout << P[i] << " ";
+                if(radius<P[i]){
+                    radius = P[i];
+                    c = i;
+                }
+            }
+            ss = ss.substr(c-radius,2*radius+1);
+            if(ss.compare("^")==0){
+                return s.substr(0,1);
+            }
+            ss = regex_replace(ss, std::regex("\\#|\\^|\\$"), "");
+            return ss;
         }
-        new_s.push_back('$');
-
-        vector<int> P;
-
-        for(int i=0; i<new_s.size(); i++){
-           if()
-        }
-        
-        return res;
-    }
 };
 
 int main(){
@@ -225,7 +252,9 @@ int main(){
 
     inputs = {"babad","cbbd","a","ac","aacabdkacaa"};
     for(int i=0; i<inputs.size();i++){
+        cout << inputs[i] << "\n";
         cout << s.longestPalindrome(inputs[i]) << endl;
+        cout << "\n";
     }
 
 }

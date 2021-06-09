@@ -1,7 +1,7 @@
 [
 {
-  "directory": "/home/chen/workspace/leetcode",
-  "command": "/usr/bin/c++    -g   -o CMakeFiles/main.dir/main.cpp.o -c /home/chen/workspace/leetcode/main.cpp",
-  "file": "/home/chen/workspace/leetcode/main.cpp"
+  "directory": "/home/mc/erp/data/leetcode",
+  "command": "/usr/bin/c++   -g -o CMakeFiles/main.dir/main.cpp.o -c /home/mc/erp/data/leetcode/main.cpp",
+  "file": "/home/mc/erp/data/leetcode/main.cpp"
 }
 ]

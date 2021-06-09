@@ -1,6 +1,7 @@
 # Prerequisites
 *.d
 core
+CMakeCache.txt
 CMakeFiles/
 
 # Compiled Object files
