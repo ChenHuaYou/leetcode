@@ -232,9 +232,15 @@ class Solution {
             int radius = 0;
             for(int i=0; i<ss.size(); i++){
                 cout << P[i] << " ";
-                if(radius<P[i]){
-                    radius = P[i];
-                    c = i;
+                if(P[i]>0){
+                    if(radius<P[i]){
+                        radius = P[i];
+                        c = i;
+                    }else if(radius==P[i]){
+                        if(i%2==0){
+                            c = i;
+                        }
+                    }
                 }
             }
             ss = ss.substr(c-radius,2*radius+1);
@@ -250,7 +256,9 @@ int main(){
 	Solution s;
     vector<string> inputs;
 
-    inputs = {"babad","cbbd","a","ac","aacabdkacaa"};
+    inputs = {"babad","cbbd","a","ac","aacabdkacaa","abb"};
+    inputs = {"abb"};
+    inputs = {"a"};
     for(int i=0; i<inputs.size();i++){
         cout << inputs[i] << "\n";
         cout << s.longestPalindrome(inputs[i]) << endl;
