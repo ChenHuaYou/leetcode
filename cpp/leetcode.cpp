@@ -270,16 +270,13 @@ string Solution::convert(string s, int numRows) {
     }
     printf("\n");
 
-    char out[s.size()];
-    k = 0;
+    string out;
     for(int i=0; i<numRows; i++){
         for(int j=0; j<numCols; j++){
             if(p[i][j]==true){
-                out[k] = P[i][j];
-                k++;
+                out.push_back(P[i][j]);
             }
         }
-        printf("\n");
     }
     return out;
 }
