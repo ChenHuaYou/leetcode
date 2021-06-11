@@ -231,7 +231,6 @@ string Solution::convert(string s, int numRows) {
 
     for(int i=0; i<numRows; i++){
         for(int j=0; j<numCols; j++){
-            P[i][j] = '#';
             p[i][j] = false;
         }
     }
@@ -254,22 +253,6 @@ string Solution::convert(string s, int numRows) {
             }
         }
     }
-    for(int i=0; i<numRows; i++){
-        for(int j=0; j<numCols; j++){
-            printf("%c ",P[i][j]);
-        }
-        printf("\n");
-    }
-    printf("\n");
-
-    for(int i=0; i<numRows; i++){
-        for(int j=0; j<numCols; j++){
-            printf("%d ",p[i][j]);
-        }
-        printf("\n");
-    }
-    printf("\n");
-
     string out;
     for(int i=0; i<numRows; i++){
         for(int j=0; j<numCols; j++){
