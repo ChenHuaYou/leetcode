@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/home/chen/workspace/leetcode/c",
+  "command": "/usr/bin/cc   -g   -o CMakeFiles/leetcode.dir/leetcode.c.o   -c /home/chen/workspace/leetcode/c/leetcode.c",
+  "file": "/home/chen/workspace/leetcode/c/leetcode.c"
+},
+{
+  "directory": "/home/chen/workspace/leetcode/c",
+  "command": "/usr/bin/cc   -g   -o CMakeFiles/main.dir/main.c.o   -c /home/chen/workspace/leetcode/c/main.c",
+  "file": "/home/chen/workspace/leetcode/c/main.c"
+}
+]

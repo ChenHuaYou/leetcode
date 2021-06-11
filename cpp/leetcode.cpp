@@ -264,3 +264,22 @@ string Solution::convert(string s, int numRows) {
     return out;
 }
 
+long Solution::reverse(long x){
+    vector<int> buf;
+    int sgn = (x>0)?1:-1;
+    x = abs(x);
+    while(x>0){
+       int q = x / 10;
+       int r = x % 10;
+       buf.push_back(r);
+       x = q;
+    }
+    long out = 0;
+    int n = buf.size();
+    for(int i=0; i<n; i++){
+       out += pow(10,i) * buf[n-i-1]; 
+    }
+    out = sgn * out;
+    if(out<-pow(2,31) or out>pow(2,31)-1) return 0;
+    return out;
+}

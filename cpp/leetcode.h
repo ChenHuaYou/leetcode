@@ -29,5 +29,5 @@ class Solution{
         double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2);
         string longestPalindrome(string s);
         string convert(string s, int numRows);
-
+        long reverse(long x);
 };

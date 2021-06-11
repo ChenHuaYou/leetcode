@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/chen/workspace/leetcode
+CMAKE_SOURCE_DIR = /home/chen/workspace/leetcode/c
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/chen/workspace/leetcode
+CMAKE_BINARY_DIR = /home/chen/workspace/leetcode/c
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/workspace/leetcode/CMakeFiles /home/chen/workspace/leetcode/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/workspace/leetcode/c/CMakeFiles /home/chen/workspace/leetcode/c/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/workspace/leetcode/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/workspace/leetcode/c/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named leetcode
+
+# Build rule for target.
+leetcode: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 leetcode
+.PHONY : leetcode
+
+# fast build rule for target.
+leetcode/fast:
+	$(MAKE) -f CMakeFiles/leetcode.dir/build.make CMakeFiles/leetcode.dir/build
+.PHONY : leetcode/fast
+
+#=============================================================================
 # Target rules for targets named main
 
 # Build rule for target.
@@ -123,32 +136,59 @@ main/fast:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
 .PHONY : main/fast
 
-main.o: main.cpp.o
+leetcode.o: leetcode.c.o
+
+.PHONY : leetcode.o
+
+# target to build an object file
+leetcode.c.o:
+	$(MAKE) -f CMakeFiles/leetcode.dir/build.make CMakeFiles/leetcode.dir/leetcode.c.o
+.PHONY : leetcode.c.o
+
+leetcode.i: leetcode.c.i
+
+.PHONY : leetcode.i
+
+# target to preprocess a source file
+leetcode.c.i:
+	$(MAKE) -f CMakeFiles/leetcode.dir/build.make CMakeFiles/leetcode.dir/leetcode.c.i
+.PHONY : leetcode.c.i
+
+leetcode.s: leetcode.c.s
+
+.PHONY : leetcode.s
+
+# target to generate assembly for a file
+leetcode.c.s:
+	$(MAKE) -f CMakeFiles/leetcode.dir/build.make CMakeFiles/leetcode.dir/leetcode.c.s
+.PHONY : leetcode.c.s
+
+main.o: main.c.o
 
 .PHONY : main.o
 
 # target to build an object file
-main.cpp.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.o
-.PHONY : main.cpp.o
+main.c.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.c.o
+.PHONY : main.c.o
 
-main.i: main.cpp.i
+main.i: main.c.i
 
 .PHONY : main.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.i
-.PHONY : main.cpp.i
+main.c.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.c.i
+.PHONY : main.c.i
 
-main.s: main.cpp.s
+main.s: main.c.s
 
 .PHONY : main.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.s
-.PHONY : main.cpp.s
+main.c.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.c.s
+.PHONY : main.c.s
 
 # Help Target
 help:
@@ -157,8 +197,12 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... main"
+	@echo "... leetcode"
 	@echo "... edit_cache"
+	@echo "... main"
+	@echo "... leetcode.o"
+	@echo "... leetcode.i"
+	@echo "... leetcode.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
