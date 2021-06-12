@@ -4,9 +4,14 @@
 
 int main(){
 
-    char *inputs[] = {"42","   -42","4193 with words","words and 987","-91283472332"};
-    int n = sizeof(inputs);
+    int inputs[] = {
+        121,
+        -121,
+        -10,
+        -101,
+    };
+    int n = sizeof(inputs)/sizeof(inputs[0]);
     for(int i=0; i<n; i++){
-       printf("%d\n",myAtoi(inputs[i]));
+       printf("%d\n",isPalindrome(inputs[i]));
     }
 }
