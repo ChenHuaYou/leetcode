@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <math.h>
+#include "leetcode.h"
+#include "stdio.h"
 
 int myAtoi(char * s){
     bool flag = false; // 标记开头
@@ -83,3 +85,125 @@ bool isPalindrome(int x){
     }
     return true;
 }
+
+
+/*
+ *
+ * 给你一个字符串 s 和一个字符规律 p，请你来实现一个支持 '.' 和 '*' 的正则表达式匹配。
+
+'.' 匹配任意单个字符
+'*' 匹配零个或多个前面的那一个元素
+所谓匹配，是要涵盖 整个 字符串 s的，而不是部分字符串。
+输入：s = "aa" p = "a"
+输出：false
+解释："a" 无法匹配 "aa" 整个字符串。
+
+输入：s = "aa" p = "a*"
+输出：true
+解释：因为 '*' 代表可以匹配零个或多个前面的那一个元素, 在这里前面的元素就是 'a'。因此，字符串 "aa" 可被视为 'a' 重复了一次。
+
+输入：s = "ab" p = ".*"
+输出：true
+解释：".*" 表示可匹配零个或多个（'*'）任意字符（'.'）。
+
+输入：s = "aab" p = "c*a*b"
+输出：true
+解释：因为 '*' 表示零个或多个，这里 'c' 为 0 个, 'a' 被重复一次。因此可以匹配字符串 "aab"。
+
+输入：s = "mississippi" p = "mis*is*p*."
+输出：false
+ */
+
+
+/**
+ * 正则表达式转成有向图
+ * c*a*b
+ */
+pattern * pattern_compile(char * p){
+    int n = strlen(p);
+    int star_count = 0;
+    for(int i=0; i<n; i++){
+        if(p[i] == '*'){
+            star_count ++;
+        }
+    }
+    int ns = n - star_count + 1; // 节点数
+    pattern * pat = malloc(sizeof(pattern));
+    pat->graph = calloc(ns * ns, sizeof(char));
+    pat->status = 0;
+    pat->num_nodes = ns;
+    int j = 0;
+    for(int i=0; i<n; i++){
+        if(p[i]=='*') continue;
+        if(i+1<n && p[i+1] =='*'){
+            pat->graph[j*ns+j] = p[i];
+            pat->graph[j*ns+j+1] = '*';
+        }else{
+            pat->graph[j*ns+j+1] = p[i];
+        }
+        j++;
+    }
+    for(int i=0; i<ns; i++){
+        for(int j=0; j<ns; j++){
+            char c = pat->graph[i*ns+j];
+            if(c == 0){
+                c = '#';
+            }
+            printf("%c ",c);
+        }
+        printf("\n");
+    }
+    return pat;
+}
+
+/**
+c*a*b 匹配 aab
+c @ # # 
+# a @ # 
+# # # b 
+# # # # 
+
+a*
+a @
+# #
+ */
+bool subMatch(char * s, int loc, pattern * pat, int status){
+    printf("%c : %d,%d\n",s[loc],loc,status);
+
+    int n = strlen(s); 
+
+    if(status == pat->num_nodes-1 && loc <n) return false;
+
+    char ch0 = pat->graph[status * pat->num_nodes + status];
+    char ch1 = ' ';
+    if (status+1 < pat->num_nodes){
+        ch1 = pat->graph[status * pat->num_nodes + status + 1];
+    }
+
+
+    if(loc ==n) {
+        if(status == pat->num_nodes-1){
+            return true;
+        }else{
+            if(ch1 != '*'){
+                return false;    
+            }
+        }
+    }
+
+    if(ch1 != '*'){ // a* 型
+        return (ch1 == s[loc] || ch1 == '.') && subMatch(s, loc+1, pat, status+1);
+    }else{
+        if(loc==n) return subMatch(s, loc, pat, status+1);
+        return (ch0 == s[loc] || ch0 == '.') && subMatch(s, loc+1, pat, status) || subMatch(s, loc, pat, status+1);
+    }
+}
+
+bool isMatch(char * s, char * p){
+    int n = strlen(s);
+    int m = strlen(p);
+    int j = m-1;
+    pattern * pat = pattern_compile(p);
+    return subMatch(s, 0, pat, 0);
+}
+

@@ -9,7 +9,7 @@ int main(){
         "aa",
         "ab",
         "mississippi",*/
-        "abcdefghijklmn",
+        "ab",
     };
 
     char *pattern[] = {
@@ -17,7 +17,7 @@ int main(){
         "a*",
         ".*",
         "mis*is*p*.",*/
-        "a*a*a*a*a*a*a*a*a*a*c",
+        ".*",
     };
 
     int n = sizeof(inputs)/sizeof(inputs[0]);
