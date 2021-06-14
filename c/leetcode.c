@@ -207,3 +207,14 @@ bool isMatch(char * s, char * p){
     return subMatch(s, 0, pat, 0);
 }
 
+
+
+#define MIN(x,y) ((x)<(y)?(x):(y))
+int maxArea(int* height, int heightSize){
+    int max_area = 0;
+    int p=0, q=heightSize-1;
+    while(q-p>0){
+        
+    }
+    return max_area;
+}

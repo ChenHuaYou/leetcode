@@ -3,26 +3,9 @@
 #include <stdio.h>
 
 int main(){
+    int height[] = {1,8,6,2,5,4,8,3,7};
+    int heightSize = sizeof(height)/sizeof(int);
+    int area = maxArea(height, heightSize);
+    printf("%d\n",area);
 
-    char *inputs[] = {
-        /*"aa",
-        "aa",
-        "ab",
-        "mississippi",*/
-        "abcdefghijklmn",
-    };
-
-    char *pattern[] = {
-        /*"a",
-        "a*",
-        ".*",
-        "mis*is*p*.",*/
-        "a*a*a*a*a*a*a*a*a*a*c",
-    };
-
-    int n = sizeof(inputs)/sizeof(inputs[0]);
-    for(int i=0; i<n; i++){
-        printf("%s : %s\n",inputs[i],pattern[i]);
-       printf("%d\n",isMatch(inputs[i],pattern[i]));
-    }
 }
