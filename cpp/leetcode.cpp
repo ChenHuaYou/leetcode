@@ -283,3 +283,78 @@ long Solution::reverse(long x){
     if(out<-pow(2,31) or out>pow(2,31)-1) return 0;
     return out;
 }
+
+Pattern::Pattern(string & p){
+    int n = p.size();
+    int star_count = 0;
+    for(int i=0; i<n; i++){
+        if(p[i] == '*'){
+            star_count ++;
+        }
+    }
+    int ns = n - star_count + 1; // 节点数
+    this->graph = (char *)calloc(ns * ns, sizeof(char));
+    this->num_nodes = ns;
+    int j = 0;
+    for(int i=0; i<n; i++){
+        if(p[i]=='*') continue;
+        if(i+1<n && p[i+1] =='*'){
+            this->graph[j*ns+j] = p[i];
+            this->graph[j*ns+j+1] = '*';
+        }else{
+            this->graph[j*ns+j+1] = p[i];
+        }
+        j++;
+    }
+    for(int i=0; i<ns; i++){
+        for(int j=0; j<ns; j++){
+            char c = this->graph[i*ns+j];
+            if(c == 0){
+                c = '#';
+            }
+            printf("%c ",c);
+        }
+        printf("\n");
+    }
+}
+
+bool Pattern::subMatch(string & s, int loc, int status){
+    printf("%c : %d,%d\n",s[loc],loc,status);
+
+    int n = s.size(); 
+
+    if(status == this->num_nodes-1 && loc <n) return false;
+
+    char ch0 = this->graph[status * this->num_nodes + status];
+    char ch1 = ' ';
+    if (status+1 < this->num_nodes){
+        ch1 = this->graph[status * this->num_nodes + status + 1];
+    }
+
+    if(loc ==n) {
+        if(status == this->num_nodes-1){
+            return true;
+        }else{
+            if(ch1 != '*'){
+                return false;    
+            }
+        }
+    }
+
+    if(ch1 != '*'){ // a* 型
+        return (ch1 == s[loc] || ch1 == '.') && subMatch(s, loc+1, status+1);
+    }else{
+        if(loc==n) return subMatch(s, loc, status+1);
+        return (ch0 == s[loc] || ch0 == '.') && subMatch(s, loc+1, status) || subMatch(s, loc, status+1);
+    }
+}
+
+bool Solution::isMatch(string & s, string & p){
+    int n = s.size();
+    int m = p.size();
+    int j = m-1;
+    Pattern pattern(p);
+    return pattern.subMatch(s, 0, 0);
+}
+
+

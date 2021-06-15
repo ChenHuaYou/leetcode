@@ -2,12 +2,18 @@
 
 int main(){
 	Solution s;
-    vector<long> inputs;
+    vector<string> inputs;
+    vector<string> pattern;
 
-    inputs = {123,-123,120,0,1534236469,9876543219};
-    for(auto &x:inputs){
-        cout << x << "\n";
-        cout << s.reverse(x) << endl;
+    inputs = {
+        "abcd"
+    };
+    pattern = {
+        ".*"
+    };
+    for(auto i=0; i<inputs.size(); i++){
+        printf("%s %s\n",inputs[i].c_str(),pattern[i].c_str());
+        cout << s.isMatch(inputs[i], pattern[i]) << endl;
         cout << "\n";
     }
 

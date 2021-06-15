@@ -20,6 +20,15 @@ struct ListNode {
 	ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
+class Pattern{
+    public:
+        Pattern(string & pattern);
+        bool subMatch(string & s, int loc, int status);
+    private:
+        int num_nodes;
+        char *graph;
+};
+
 class Solution{
     public:
         bool checkSubarraySum(vector<int>& nums, int k);
@@ -30,4 +39,5 @@ class Solution{
         string longestPalindrome(string s);
         string convert(string s, int numRows);
         long reverse(long x);
+        bool isMatch(string & s, string & p);
 };
