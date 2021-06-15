@@ -2,12 +2,12 @@
 
 int main(){
 	Solution s;
-    map<string,int> inputs;
+    vector<long> inputs;
 
-    inputs = {{"PAYPALISHIRING",4},{"A",1}};
+    inputs = {123,-123,120,0,1534236469,9876543219};
     for(auto &x:inputs){
-        cout << x.first << "\n";
-        cout << s.convert(x.first,x.second) << endl;
+        cout << x << "\n";
+        cout << s.reverse(x) << endl;
         cout << "\n";
     }
 
