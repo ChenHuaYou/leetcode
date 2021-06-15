@@ -293,7 +293,10 @@ Pattern::Pattern(string & p){
         }
     }
     int ns = n - star_count + 1; // 节点数
-    this->graph = (char *)calloc(ns * ns, sizeof(char));
+    this->graph = make_unique<char[]>(ns*ns);
+    cout << graph.use_count()<< endl;
+    shared_ptr<char[]> tmp = this->graph;
+    cout << tmp.use_count()<< endl;
     this->num_nodes = ns;
     int j = 0;
     for(int i=0; i<n; i++){
@@ -358,3 +361,19 @@ bool Solution::isMatch(string & s, string & p){
 }
 
 
+
+int Solution::maxArea(vector<int>& height){
+    int p=0,q=height.size()-1;
+    int max_area = 0;
+    while(q>p){
+        cout << p << "  " << q << endl;
+        int area = (q-p)*min(height[p],height[q]);
+        if(max_area<area) max_area = area;
+        if(height[p]>=height[q]){
+            q--;
+        }else{
+            p++;
+        }
+    }
+    return max_area;
+}
