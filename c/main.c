@@ -3,9 +3,10 @@
 #include <stdio.h>
 
 int main(){
-    int height[] = {1,8,6,2,5,4,8,3,7};
-    int heightSize = sizeof(height)/sizeof(int);
-    int area = maxArea(height, heightSize);
-    printf("%d\n",area);
+    int nums[] = {3,4,9,58,1994};
+    for(int i=0;i<5;i++){
+        char * s = intToRoman(nums[i]);
+        printf("%s\n",s);
+    }
 
 }

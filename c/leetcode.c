@@ -218,3 +218,60 @@ int maxArea(int* height, int heightSize){
     }
     return max_area;
 }
+
+char * intToRoman(int num){
+    char *p = calloc(16,sizeof(char));
+    int i=0;
+    while(true){
+        if(num>=1000){
+            num -= 1000;
+            p[i++] = 'M';
+        }else if(num>=900){
+            num -= 900;
+            p[i++] = 'C';
+            p[i++] = 'M';
+        }else if(num>=500){
+            num -= 500;
+            p[i++] = 'D';
+        }else if(num>=400){
+            num -= 400;
+            p[i++] = 'C';
+            p[i++] = 'D';
+        }else if(num>=100){
+            num -= 100;
+            p[i++] = 'C';
+        }else if(num>=90){
+            num -= 90;
+            p[i++] = 'X';
+            p[i++] = 'C';
+        }else if(num>=50){
+            num -= 50;
+            p[i++] = 'L';
+        }else if(num>=40){
+            num -= 40;
+            p[i++] = 'X';
+            p[i++] = 'L';
+        }else if(num>=10){
+            num -= 10;
+            p[i++] = 'X';
+        }else if(num>=9){
+            num -= 9;
+            p[i++] = 'I';
+            p[i++] = 'X';
+        }else if(num>=5){
+            num -= 5;
+            p[i++] = 'V';
+        }else if(num>=4){
+            num -= 4;
+            p[i++] = 'I';
+            p[i++] = 'V';
+        }else if(num>=1){
+            num -= 1;
+            p[i++] = 'I';
+        }else{
+            break;
+        }
+    }
+    return p;
+}
+
