@@ -20,5 +20,6 @@ char * ReversePolishNotation(char * s);
  */
 int maxArea(int* height, int heightSize);
 
-// 12. 整数转罗马数字
 char * intToRoman(int num);
+
+int romanToInt(char * s);

@@ -3,10 +3,10 @@
 #include <stdio.h>
 
 int main(){
-    int nums[] = {3,4,9,58,1994};
+    char *s[] = {"III","IV","IX","LVIII","MCMXCIV"};
     for(int i=0;i<5;i++){
-        char * s = intToRoman(nums[i]);
-        printf("%s\n",s);
+        int num = romanToInt(s[i]);
+        printf("%d\n",num);
     }
 
 }
