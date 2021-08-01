@@ -3,10 +3,17 @@
 #include <stdio.h>
 
 int main(){
-    char *s[] = {"III","IV","IX","LVIII","MCMXCIV"};
-    for(int i=0;i<5;i++){
-        int num = romanToInt(s[i]);
-        printf("%d\n",num);
-    }
+    int nums[] = {-1,0,1,2,-1,-4};
+    int *returnSize = calloc(1,sizeof(int));
+    int **returnColumnSizes = calloc(*returnSize,sizeof(int *));
+    int **res = threeSum(nums, 6, returnSize, returnColumnSizes);
 
+    for(int i=0; i < *returnSize; i++){
+        for(int j=0; j<3; j++){
+            printf("%d ",res[i][j]);
+        }
+        printf("\n");
+    }
+    free(returnSize);
+    free(returnColumnSizes);
 }

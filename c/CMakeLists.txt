@@ -8,6 +8,7 @@ add_executable(main main.c)
 
 target_link_libraries(main PUBLIC leetcode)
 target_link_libraries(main PUBLIC m)
+target_link_libraries(main PRIVATE -fsanitize=address)
 
 
 

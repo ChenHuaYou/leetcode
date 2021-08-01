@@ -331,3 +331,78 @@ int romanToInt(char * s){
     }
     return num;
 }
+
+//14. 最长公共前缀
+char * longestCommonPrefix(char ** strs, int strsSize){
+    int strSize = 256;
+    for(int i=0; i<strsSize; i++){
+        if (strlen(strs[i])<strSize) strSize = strlen(strs[i]);
+    }
+    char *comPrefix = (char *)calloc(strSize+1,sizeof(char));
+    if(strsSize==1) return strs[0];
+    for(int i=0; i<strSize; i++){
+        int j=1;
+        for(;j<strsSize; j++){
+           if(strs[0][i]!=strs[j][i]) {
+               break;
+           }
+        }
+        if(j==strsSize){
+            comPrefix[i] = strs[0][i];
+        }else{
+            break;
+        }
+    }
+    return comPrefix;
+}
+
+// 给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，
+// 使得 a + b + c = 0 ？请你找出所有和为 0 且不重复的三元组。
+/**
+ * Return an array of arrays of size *returnSize.
+ * The sizes of the arrays are returned as *returnColumnSizes array.
+ * Note: Both returned array and *columnSizes array must be malloced, assume caller calls free().
+ */
+
+int cmpfunc (const void * a, const void * b)
+{
+   return ( *(int*)a - *(int*)b );
+}
+
+int** threeSum(int* nums, int numsSize, int* returnSize, int** returnColumnSizes){
+    int **res = calloc(numsSize, sizeof(int *));
+    //returnSize = calloc(1,sizeof(int));
+    //returnColumnSizes = calloc(numsSize, sizeof(int *));
+    *(returnSize) = 0;
+
+    qsort(nums, numsSize, sizeof(int), cmpfunc);
+    for(int i=0; i<=numsSize-3; i++){
+        if(i>0 && nums[i]==nums[i-1]) continue;
+        int L = i+1;
+        int R = numsSize-1;
+        while(true){
+            if(R<=L) break;
+            int sum = nums[i]+nums[L]+nums[R];
+            if(sum==0){
+                res[*returnSize] = calloc(3, sizeof(int));
+                res[*returnSize][0] = nums[i];
+                res[*returnSize][1] = nums[L];
+                res[*returnSize][2] = nums[R];
+                //*returnColumnSizes[(*returnSize)] = 3;
+                (*returnSize)++;
+                while(nums[L+1]==nums[L]) L++;
+                while(nums[R-1]==nums[R]) R--;
+                L++;
+                R--;
+            }else if(sum>0){
+                R--;
+            }else{
+                L++;
+            }
+        }
+    }
+    return res;
+}
+
+
+
