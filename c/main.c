@@ -5,7 +5,7 @@
 int main(){
     int nums[] = {-1,0,1,2,-1,-4};
     int *returnSize = calloc(1,sizeof(int));
-    int **returnColumnSizes = calloc(*returnSize,sizeof(int *));
+    int **returnColumnSizes;//= calloc(6,sizeof(int *));
     int **res = threeSum(nums, 6, returnSize, returnColumnSizes);
 
     for(int i=0; i < *returnSize; i++){
@@ -14,6 +14,10 @@ int main(){
         }
         printf("\n");
     }
+    //free(returnColumnSizes);
+    for(int i=0; i<(*returnSize); i++){
+        free(res[i]);
+    }
+    free(res);
     free(returnSize);
-    free(returnColumnSizes);
 }
