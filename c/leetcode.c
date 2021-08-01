@@ -373,7 +373,6 @@ int** threeSum(int* nums, int numsSize, int* returnSize, int** returnColumnSizes
     int **res = calloc(numsSize, sizeof(int *));
     //returnSize = calloc(1,sizeof(int));
     //returnColumnSizes = calloc(numsSize, sizeof(int *));
-    *(returnSize) = 0;
 
     qsort(nums, numsSize, sizeof(int), cmpfunc);
     for(int i=0; i<=numsSize-3; i++){
