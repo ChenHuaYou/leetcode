@@ -5,6 +5,56 @@
 #include "leetcode.h"
 #include "stdio.h"
 
+// 给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，
+// 使得 a + b + c = 0 ？请你找出所有和为 0 且不重复的三元组。
+/**
+ * Return an array of arrays of size *returnSize.
+ * The sizes of the arrays are returned as *returnColumnSizes array.
+ * Note: Both returned array and *columnSizes array must be malloced, assume caller calls free().
+ */
+
+int cmpfunc (const void * a, const void * b)
+{
+   return ( *(int*)a - *(int*)b );
+}
+
+int** threeSum(int* nums, int numsSize, int* returnSize, int** returnColumnSizes){
+    *returnSize = 0;
+    *returnColumnSizes = calloc(numsSize,sizeof(int));
+    int **res = calloc(numsSize, sizeof(int *));
+
+    qsort(nums, numsSize, sizeof(int), cmpfunc);
+    for(int i=0; i<=numsSize-3; i++){
+        if(i>0 && nums[i]==nums[i-1]) continue;
+        int L = i+1;
+        int R = numsSize-1;
+        while(true){
+            if(R<=L) break;
+            int sum = nums[i]+nums[L]+nums[R];
+            if(sum==0){
+                res[*returnSize] = calloc(3, sizeof(int));
+                res[*returnSize][0] = nums[i];
+                res[*returnSize][1] = nums[L];
+                res[*returnSize][2] = nums[R];
+                (*returnColumnSizes)[*returnSize] = 3;
+                (*returnSize)++;
+                while(nums[L+1]==nums[L]) L++;
+                while(nums[R-1]==nums[R]) R--;
+                L++;
+                R--;
+            }else if(sum>0){
+                R--;
+            }else{
+                L++;
+            }
+        }
+    }
+    return res;
+}
+
+
+
+
 int myAtoi(char * s){
     bool flag = false; // 标记开头
     int sign = 1;
@@ -355,53 +405,5 @@ char * longestCommonPrefix(char ** strs, int strsSize){
     }
     return comPrefix;
 }
-
-// 给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，
-// 使得 a + b + c = 0 ？请你找出所有和为 0 且不重复的三元组。
-/**
- * Return an array of arrays of size *returnSize.
- * The sizes of the arrays are returned as *returnColumnSizes array.
- * Note: Both returned array and *columnSizes array must be malloced, assume caller calls free().
- */
-
-int cmpfunc (const void * a, const void * b)
-{
-   return ( *(int*)a - *(int*)b );
-}
-
-int** threeSum(int* nums, int numsSize, int* returnSize, int** returnColumnSizes){
-    int **res = calloc(numsSize, sizeof(int *));
-    //returnSize = calloc(1,sizeof(int));
-    //returnColumnSizes = calloc(numsSize, sizeof(int *));
-
-    qsort(nums, numsSize, sizeof(int), cmpfunc);
-    for(int i=0; i<=numsSize-3; i++){
-        if(i>0 && nums[i]==nums[i-1]) continue;
-        int L = i+1;
-        int R = numsSize-1;
-        while(true){
-            if(R<=L) break;
-            int sum = nums[i]+nums[L]+nums[R];
-            if(sum==0){
-                res[*returnSize] = calloc(3, sizeof(int));
-                res[*returnSize][0] = nums[i];
-                res[*returnSize][1] = nums[L];
-                res[*returnSize][2] = nums[R];
-                //*returnColumnSizes[(*returnSize)] = 3;
-                (*returnSize)++;
-                while(nums[L+1]==nums[L]) L++;
-                while(nums[R-1]==nums[R]) R--;
-                L++;
-                R--;
-            }else if(sum>0){
-                R--;
-            }else{
-                L++;
-            }
-        }
-    }
-    return res;
-}
-
 
 
