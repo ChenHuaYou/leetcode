@@ -15,3 +15,5 @@ char * intToRoman(int num);
 int romanToInt(char * s);
 char * longestCommonPrefix(char ** strs, int strsSize);
 int** threeSum(int* nums, int numsSize, int* returnSize, int** returnColumnSizes);
+int threeSumClosest(int* nums, int numsSize, int target);
+int cmpfunc (const void * a, const void * b);

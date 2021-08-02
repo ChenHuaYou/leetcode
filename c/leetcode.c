@@ -5,6 +5,33 @@
 #include "leetcode.h"
 #include "stdio.h"
 
+
+//给定一个包括 n 个整数的数组 nums 和 一个目标值 target。
+//找出 nums 中的三个整数，使得它们的和与 target 最接近。
+//返回这三个数的和。假定每组输入只存在唯一答案。
+int threeSumClosest(int* nums, int numsSize, int target){
+    int best_diff = nums[0]+nums[1]+nums[2]-target;
+    qsort(nums, numsSize, sizeof(int), cmpfunc);
+    for(int i=0; i<=numsSize-3; i++){
+        if(i>0 && nums[i]==nums[i-1]) continue;
+        int L = i + 1;
+        int R = numsSize-1;
+        while(true){
+            if(R<=L) break;
+            int diff = nums[i] + nums[L] + nums[R] - target;
+            if(abs(diff)<abs(best_diff)) best_diff = diff;
+            if(diff==0) {
+                return target;
+            }else if(diff>0){
+                R--;
+            }else{
+                L++;
+            }
+        }
+    }
+    return best_diff + target;
+}
+
 // 给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，
 // 使得 a + b + c = 0 ？请你找出所有和为 0 且不重复的三元组。
 /**
