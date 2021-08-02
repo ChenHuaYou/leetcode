@@ -6,6 +6,19 @@
 #include "stdio.h"
 
 
+///给定一个仅包含数字 2-9 的字符串，
+//返回所有它能表示的字母组合。答案可以按 任意顺序 返回。
+//给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+char ** letterCombinations(char * digits, int* returnSize){
+    char *data[] = {"abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+    unsigned int num_digits = strlen(digits);
+
+}
+
+
 //给定一个包括 n 个整数的数组 nums 和 一个目标值 target。
 //找出 nums 中的三个整数，使得它们的和与 target 最接近。
 //返回这三个数的和。假定每组输入只存在唯一答案。
