@@ -3,10 +3,10 @@
 #include <stdio.h>
 
 int main(){
-    int nums[] = {-1,0,1,2,-1,-4};
+    int nums[] = {-7,-4,-6,6,4,-6,-9,-10,-7,5,3,-1,-5,8,-1,-2,-8,-1,5,-3,-5,4,2,-5,-4,4,7};
     int returnSize;
-    int *returnColumnSizes;//= (int *)calloc(6,sizeof(int));
-    int **res = threeSum(nums, 6, &returnSize, &returnColumnSizes);
+    int *returnColumnSizes;
+    int **res = threeSum(nums, 27, &returnSize, &returnColumnSizes);
 
     for(int i=0; i < returnSize; i++){
         for(int j=0; j<3; j++){

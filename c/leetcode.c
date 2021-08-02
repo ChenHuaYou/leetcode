@@ -20,8 +20,9 @@ int cmpfunc (const void * a, const void * b)
 
 int** threeSum(int* nums, int numsSize, int* returnSize, int** returnColumnSizes){
     *returnSize = 0;
-    *returnColumnSizes = calloc(numsSize,sizeof(int));
-    int **res = calloc(numsSize, sizeof(int *));
+    *returnColumnSizes = calloc(pow(numsSize,2),sizeof(int));
+    int **res = calloc(pow(numsSize,2), sizeof(int *));
+    if(numsSize<3) return 0;
 
     qsort(nums, numsSize, sizeof(int), cmpfunc);
     for(int i=0; i<=numsSize-3; i++){
@@ -38,8 +39,8 @@ int** threeSum(int* nums, int numsSize, int* returnSize, int** returnColumnSizes
                 res[*returnSize][2] = nums[R];
                 (*returnColumnSizes)[*returnSize] = 3;
                 (*returnSize)++;
-                while(nums[L+1]==nums[L]) L++;
-                while(nums[R-1]==nums[R]) R--;
+                while(L+1 < R && nums[L+1]==nums[L]) L++;
+                while(R-1 > L && nums[R-1]==nums[R]) R--;
                 L++;
                 R--;
             }else if(sum>0){
