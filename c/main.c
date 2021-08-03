@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 int main(){
-    char *digits = "23";
+    char *digits = "";
     int returnSize=0;
     char** res = letterCombinations(digits, &returnSize);
     for(int i=0; i<returnSize; i++){

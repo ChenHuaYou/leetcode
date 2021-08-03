@@ -33,6 +33,10 @@ char ** letterCombinations(char * digits, int* returnSize){
     char *path = calloc(strlen(digits)+1,sizeof(char));
     char **res = calloc(pow(4,strlen(digits)),sizeof(char *));
     *returnSize = 0;
+    if(strlen(digits)==0) {
+        free(path);
+        return res;
+    }
     backtrace(phone, res, returnSize, path, digits);
     free(path);
     return res;
