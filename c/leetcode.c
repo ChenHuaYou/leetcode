@@ -12,10 +12,28 @@
 /**
  * Note: The returned array must be malloced, assume caller calls free().
  */
-char ** letterCombinations(char * digits, int* returnSize){
-    char *data[] = {"abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
-    unsigned int num_digits = strlen(digits);
 
+void backtrace(char **phone, char **res, int *resSize, char *path, char *digits){
+    if(strlen(digits)==0){
+        res[*resSize] = calloc(strlen(path)+1,sizeof(char));
+        strcpy(res[*resSize], path);
+        (*resSize)++;
+    }else{
+        for(int j=0;j<strlen(phone[digits[0]-50]);j++){
+            path[strlen(path)] = phone[digits[0]-50][j];
+            backtrace(phone, res, resSize, path, digits+1);
+        }
+    }
+    path[strlen(path)-1]='\0';
+}
+char ** letterCombinations(char * digits, int* returnSize){
+    char *phone[] = {"abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+    char *path = calloc(strlen(digits)+1,sizeof(char));
+    char **res = calloc(4*strlen(digits),sizeof(char *));
+    *returnSize = 0;
+    backtrace(phone, res, returnSize, path, digits);
+    free(path);
+    return res;
 }
 
 

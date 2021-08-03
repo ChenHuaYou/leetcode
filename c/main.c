@@ -3,8 +3,12 @@
 #include <stdio.h>
 
 int main(){
-    int nums[] = {-1,2,1,-4};
-    int target = 1;
-    int res = threeSumClosest(nums, 4, target);
-    printf("%d \n",res);
+    char *digits = "23";
+    int returnSize=0;
+    char** res = letterCombinations(digits, &returnSize);
+    for(int i=0; i<returnSize; i++){
+        printf("%s\n",res[i]);
+        free(res[i]);
+    }
+    free(res);
 }
