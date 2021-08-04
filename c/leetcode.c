@@ -5,27 +5,22 @@
 #include "leetcode.h"
 #include "stdio.h"
 
-
-#define MAP_ADD(_key,_val) \
-    p = malloc(sizeof(struct HashMap)); \
-    p->key = _key; \
-    p->val = _val; \
-    HASH_ADD_INT(map, key, p);
+int map(char ch){
+    int out = 0;
+    switch (ch) {
+        case '(': out = 1; break ;
+        case ')': out = -1; break ;
+        case '{': out = 2; break ;
+        case '}': out = -2; break ;
+        case '[': out = 3; break ;
+        case ']': out = -3; break ;
+    }
+    return out;
+}
 
 //给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串 s ，判断字符串是否有效
 bool isValid(char * s){
     if(strlen(s)==0) return true;
-    struct HashMap *p;
-    struct HashMap *map = NULL;
-
-    MAP_ADD('(', 1);
-    MAP_ADD(')',-1);
-    MAP_ADD('{',2);
-    MAP_ADD('}',-2);
-    MAP_ADD('[',3);
-    MAP_ADD(']',-3);
-
-    
     char *base = calloc(strlen(s),sizeof(char));
     int top = -1;
     for(int i=0; i<strlen(s); i++){
@@ -33,25 +28,13 @@ bool isValid(char * s){
             base[++top] = s[i];
             continue;
         }
-        struct HashMap *out;
-        int ch = s[i];
-        HASH_FIND_INT(map, &ch, out);
-        int strVal = out->val;
-        ch = base[top];
-        HASH_FIND_INT(map, &ch, out);
-        int stkVal = out->val;
-        if(strVal+stkVal==0){
+        if(map(s[i])+map(base[top])==0 && map(base[top])>0){
             top--;
         }else{
             base[++top]=s[i];
         }
     }
     free(base);
-    struct HashMap *current, *tmp;
-    HASH_ITER(hh, map, current, tmp){
-        HASH_DEL(map, current);
-        free(current);
-    }
     if(top==-1){
        return true; 
     }
