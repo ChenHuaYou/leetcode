@@ -1,20 +1,24 @@
 #include "leetcode.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 int main(){
-    int nums[10] ={-4,-3,-2,-1,0,0,1,2,3,4};
-    int target = 0;
-    int returnSize=0;
-    int *returnColumnSizes=NULL;
-    int** res = fourSum(nums, 10, target, &returnSize, &returnColumnSizes);
-    for(int i=0; i<returnSize; i++){
-        for(int j=0; j<returnColumnSizes[i]; j++){
-            printf("%d ",res[i][j]);
-        }
-        printf("\n");
-        free(res[i]);
+    char *nums = "12";
+    struct ListNode * head, *p;
+    head = p = calloc(1,sizeof(struct ListNode));
+    head->val = nums[0] - 48;
+    for(int i=1; i<strlen(nums);i++){
+       p->next = calloc(1,sizeof(struct ListNode)); 
+       p = p->next;
+       p->val = nums[i] - 48;
     }
-    free(res);
-    free(returnColumnSizes);
+    p = head = removeNthFromEnd(head, 1);
+    while(p!=NULL){
+        printf("%d ",p->val);
+        struct ListNode *tmp = p;
+        p = p->next;
+        free(tmp);
+    }
+    printf("\n");
 }

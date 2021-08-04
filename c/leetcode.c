@@ -6,10 +6,6 @@
 #include "stdio.h"
 
 //给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。
-struct ListNode {
-    int val;
-    struct ListNode *next;
-};
 
 struct ListNode* removeNthFromEnd(struct ListNode* head, int n){
     struct ListNode *p = head;
@@ -24,12 +20,14 @@ struct ListNode* removeNthFromEnd(struct ListNode* head, int n){
         }
         p = p->next;
     }
-    if(count==1) return head;
-    if(n<=count-2){
-        record[count-n-1]->next = record[count-n+1];
-    }else{
-        record[count-n-1]->next = NULL;
+    if(count==1) {
+        free(head);
+        free(record);
+        return NULL;
     }
+    record[count-n-1]->next = record[count-n]->next;
+    free(record[count-n]);
+    free(record);
     return head;
 }
 

@@ -19,3 +19,8 @@ int threeSumClosest(int* nums, int numsSize, int target);
 int cmpfunc (const void * a, const void * b);
 char ** letterCombinations(char * digits, int* returnSize);
 int** fourSum(int* nums, int numsSize, int target, int* returnSize, int** returnColumnSizes);
+struct ListNode {
+    int val;
+    struct ListNode *next;
+};
+struct ListNode* removeNthFromEnd(struct ListNode* head, int n);
