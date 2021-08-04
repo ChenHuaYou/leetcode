@@ -18,7 +18,7 @@ int** fourSum(int* nums, int numsSize, int target, int* returnSize, int** return
     qsort(nums, numsSize, sizeof(int), cmpfunc);
     int negNums = 0;
     while (negNums<numsSize){
-        if(nums[negNums]>0) break;
+        if(nums[negNums]-target>0) break;
         negNums++;
     }
     *returnSize = 0;
