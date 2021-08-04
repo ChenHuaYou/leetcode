@@ -1,4 +1,5 @@
 #include <stdbool.h>
+#include "uthash.h"
 
 int myAtoi(char * s);
 bool isPalindrome(int x);
@@ -24,3 +25,9 @@ struct ListNode {
     struct ListNode *next;
 };
 struct ListNode* removeNthFromEnd(struct ListNode* head, int n);
+struct HashMap{
+    int key;
+    int val;
+    UT_hash_handle hh;
+};
+bool isValid(char * s);

@@ -5,6 +5,58 @@
 #include "leetcode.h"
 #include "stdio.h"
 
+
+#define MAP_ADD(_key,_val) \
+    p = malloc(sizeof(struct HashMap)); \
+    p->key = _key; \
+    p->val = _val; \
+    HASH_ADD_INT(map, key, p);
+
+//给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串 s ，判断字符串是否有效
+bool isValid(char * s){
+    if(strlen(s)==0) return true;
+    struct HashMap *p;
+    struct HashMap *map = NULL;
+
+    MAP_ADD('(', 1);
+    MAP_ADD(')',-1);
+    MAP_ADD('{',2);
+    MAP_ADD('}',-2);
+    MAP_ADD('[',3);
+    MAP_ADD(']',-3);
+
+    
+    char *base = calloc(strlen(s),sizeof(char));
+    int top = -1;
+    base[++top] = s[0];
+    for(int i=1; i<strlen(s); i++){
+        struct HashMap *out;
+        int ch = s[i];
+        HASH_FIND_INT(map, &ch, out);
+        int strVal = out->val;
+        ch = base[top];
+        HASH_FIND_INT(map, &ch, out);
+        int stkVal = out->val;
+        if(strVal+stkVal==0){
+            top--;
+        }else{
+            base[++top]=s[i];
+        }
+    }
+    free(base);
+    struct HashMap *current, *tmp;
+    HASH_ITER(hh, map, current, tmp){
+        HASH_DEL(map, current);
+        free(current);
+    }
+    if(top==-1){
+       return true; 
+    }
+
+    return false;
+}
+
+
 //给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。
 
 struct ListNode* removeNthFromEnd(struct ListNode* head, int n){
