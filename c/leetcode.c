@@ -36,9 +36,10 @@ int** fourSum(int* nums, int numsSize, int target, int* returnSize, int** return
                     res[*returnSize][3] = nums[R];
                     (*returnColumnSizes)[*returnSize] = 4;
                     (*returnSize)++;
-                    if (*returnSize>maxSize){
+                    if (*returnSize==maxSize){
                         maxSize += numsSize;
                         res = realloc(res, maxSize * sizeof(int *));
+                        *returnColumnSizes = realloc(*returnColumnSizes, maxSize * sizeof(int));
                     }
                     while(L+1<R & nums[L]==nums[L+1]) L++;
                     while(L+1<R & nums[R]==nums[R-1]) R--;

@@ -3,11 +3,11 @@
 #include <stdio.h>
 
 int main(){
-    int nums[8] = {1,-2,-5,-4,-3,3,3,5};
-    int target = -11;
+    int nums[10] ={-4,-3,-2,-1,0,0,1,2,3,4};
+    int target = 0;
     int returnSize=0;
     int *returnColumnSizes=NULL;
-    int** res = fourSum(nums, 8, target, &returnSize, &returnColumnSizes);
+    int** res = fourSum(nums, 10, target, &returnSize, &returnColumnSizes);
     for(int i=0; i<returnSize; i++){
         for(int j=0; j<returnColumnSizes[i]; j++){
             printf("%d ",res[i][j]);
