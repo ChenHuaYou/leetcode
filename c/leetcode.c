@@ -21,10 +21,10 @@ struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2){
 
     while(l1!=NULL || l2!= NULL){
         if(l1->val>l2->val){
-            tail=l2;
+            tail->next = l2;
             l2=l2->next;
         }else{
-            tail=l1;
+            tail->next = l1;
             l1=l1->next;
         }
     }
