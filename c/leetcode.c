@@ -15,10 +15,15 @@
  * Note: Both returned array and *columnSizes array must be malloced, assume caller calls free().
  */
 int** fourSum(int* nums, int numsSize, int target, int* returnSize, int** returnColumnSizes){
-    *returnSize = 0;
-    int **res = calloc(pow(numsSize,4),sizeof(int *));
-    *returnColumnSizes = calloc(pow(numsSize,4),sizeof(int));
     qsort(nums, numsSize, sizeof(int), cmpfunc);
+    int negNums = 0;
+    while (negNums<numsSize){
+        if(nums[negNums]>0) break;
+        negNums++;
+    }
+    *returnSize = 0;
+    int **res = calloc(pow(negNums,3),sizeof(int *));
+    *returnColumnSizes = calloc(pow(negNums,3),sizeof(int));
     for(int i=0; i<=numsSize-4; i++){
         if(i!=0 && nums[i]==nums[i-1]) continue;
         for(int j=i+1; j<numsSize; j++){
@@ -131,10 +136,11 @@ int** threeSum(int* nums, int numsSize, int* returnSize, int** returnColumnSizes
     int negNums = 0;
     while (negNums<numsSize){
         if(nums[negNums]>0) break;
+        negNums++;
     }
     *returnSize = 0;
-    *returnColumnSizes = calloc(pow(negNums,3),sizeof(int));
-    int **res = calloc(pow(negNums,3), sizeof(int *));
+    *returnColumnSizes = calloc(pow(negNums,2),sizeof(int));
+    int **res = calloc(pow(negNums,2), sizeof(int *));
     if(numsSize<3) return 0;
 
     for(int i=0; i<=numsSize-3; i++){
