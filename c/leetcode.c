@@ -16,17 +16,19 @@ struct ListNode* removeNthFromEnd(struct ListNode* head, int n){
     int count = 0;
     int maxSize = 5;
     struct ListNode **record = calloc(maxSize, sizeof(struct ListNode *));
-    while (p->next != NULL){
+    while (p != NULL){
         record[count++] = p;
         if(count==maxSize) {
             maxSize += 5;
             record = realloc(record, maxSize * sizeof(struct ListNode *));
         }
+        p = p->next;
     }
-    if(n<=count-3){
-        record[count-n]->next = record[count-n+2];
+    if(count==1) return head;
+    if(n<=count-2){
+        record[count-n-1]->next = record[count-n+1];
     }else{
-        record[count-n]->next = NULL;
+        record[count-n-1]->next = NULL;
     }
     return head;
 }
