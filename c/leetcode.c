@@ -5,6 +5,32 @@
 #include "leetcode.h"
 #include "stdio.h"
 
+
+
+//将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 
+
+struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2){
+    struct ListNode *head=NULL, *tail=NULL;
+    if(l1->val>l2->val){
+        tail=head=l2;
+        l2=l2->next;
+    }else{
+        tail=head=l1;
+        l1=l1->next;
+    }
+
+    while(l1!=NULL || l2!= NULL){
+        if(l1->val>l2->val){
+            tail=l2;
+            l2=l2->next;
+        }else{
+            tail=l1;
+            l1=l1->next;
+        }
+    }
+    return head;
+}
+
 int map(char ch){
     int out = 0;
     switch (ch) {

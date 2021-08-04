@@ -31,3 +31,4 @@ struct HashMap{
     UT_hash_handle hh;
 };
 bool isValid(char * s);
+struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2);
