@@ -20,12 +20,11 @@ struct ListNode* removeNthFromEnd(struct ListNode* head, int n){
         }
         p = p->next;
     }
-    if(count==1) {
-        free(head);
-        free(record);
-        return NULL;
+    if(count-n-1>=0){
+        record[count-n-1]->next = record[count-n]->next;
+    }else{
+        head = record[count-n]->next;
     }
-    record[count-n-1]->next = record[count-n]->next;
     free(record[count-n]);
     free(record);
     return head;

@@ -13,7 +13,7 @@ int main(){
        p = p->next;
        p->val = nums[i] - 48;
     }
-    p = head = removeNthFromEnd(head, 1);
+    p = head = removeNthFromEnd(head, 2);
     while(p!=NULL){
         printf("%d ",p->val);
         struct ListNode *tmp = p;
