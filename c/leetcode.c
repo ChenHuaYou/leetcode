@@ -127,12 +127,16 @@ int cmpfunc (const void * a, const void * b)
 }
 
 int** threeSum(int* nums, int numsSize, int* returnSize, int** returnColumnSizes){
+    qsort(nums, numsSize, sizeof(int), cmpfunc);
+    int negNums = 0;
+    while (negNums<numsSize){
+        if(nums[negNums]>0) break;
+    }
     *returnSize = 0;
-    *returnColumnSizes = calloc(pow(numsSize,2),sizeof(int));
-    int **res = calloc(pow(numsSize,2), sizeof(int *));
+    *returnColumnSizes = calloc(pow(negNums,3),sizeof(int));
+    int **res = calloc(pow(negNums,3), sizeof(int *));
     if(numsSize<3) return 0;
 
-    qsort(nums, numsSize, sizeof(int), cmpfunc);
     for(int i=0; i<=numsSize-3; i++){
         if(i>0 && nums[i]==nums[i-1]) continue;
         int L = i+1;
