@@ -5,6 +5,31 @@
 #include "leetcode.h"
 #include "stdio.h"
 
+//给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。
+struct ListNode {
+    int val;
+    struct ListNode *next;
+};
+
+struct ListNode* removeNthFromEnd(struct ListNode* head, int n){
+    struct ListNode *p = head;
+    int count = 0;
+    int maxSize = 5;
+    struct ListNode **record = calloc(maxSize, sizeof(struct ListNode *));
+    while (p->next != NULL){
+        record[count++] = p;
+        if(count==maxSize) {
+            maxSize += 5;
+            record = realloc(record, maxSize * sizeof(struct ListNode *));
+        }
+    }
+    if(n<=count-3){
+        record[count-n]->next = record[count-n+2];
+    }else{
+        record[count-n]->next = NULL;
+    }
+    return head;
+}
 
 //给定一个包含 n 个整数的数组 nums 和一个目标值 target，
 //判断 nums 中是否存在四个元素 a，b，c 和 d ，
