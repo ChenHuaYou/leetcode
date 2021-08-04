@@ -28,8 +28,11 @@ bool isValid(char * s){
     
     char *base = calloc(strlen(s),sizeof(char));
     int top = -1;
-    base[++top] = s[0];
-    for(int i=1; i<strlen(s); i++){
+    for(int i=0; i<strlen(s); i++){
+        if(top==-1){
+            base[++top] = s[i];
+            continue;
+        }
         struct HashMap *out;
         int ch = s[i];
         HASH_FIND_INT(map, &ch, out);

@@ -4,6 +4,6 @@
 #include <string.h>
 
 int main(){
-    char *s = "[]";
+    char *s = "()[]{}";
     printf("%d\n",isValid(s));
 }
