@@ -16,14 +16,10 @@
  */
 int** fourSum(int* nums, int numsSize, int target, int* returnSize, int** returnColumnSizes){
     qsort(nums, numsSize, sizeof(int), cmpfunc);
-    int negNums = 0;
-    while (negNums<numsSize){
-        if(nums[negNums]-target>0) break;
-        negNums++;
-    }
     *returnSize = 0;
-    int **res = calloc(pow(negNums,3),sizeof(int *));
-    *returnColumnSizes = calloc(pow(negNums,3),sizeof(int));
+    int maxSize = numsSize;
+    int **res = calloc(maxSize,sizeof(int *));
+    *returnColumnSizes = calloc(maxSize,sizeof(int));
     for(int i=0; i<=numsSize-4; i++){
         if(i!=0 && nums[i]==nums[i-1]) continue;
         for(int j=i+1; j<numsSize; j++){
@@ -40,6 +36,10 @@ int** fourSum(int* nums, int numsSize, int target, int* returnSize, int** return
                     res[*returnSize][3] = nums[R];
                     (*returnColumnSizes)[*returnSize] = 4;
                     (*returnSize)++;
+                    if (*returnSize>maxSize){
+                        maxSize += numsSize;
+                        res = realloc(res, maxSize * sizeof(int *));
+                    }
                     while(L+1<R & nums[L]==nums[L+1]) L++;
                     while(L+1<R & nums[R]==nums[R-1]) R--;
                     R--;
