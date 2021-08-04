@@ -6,6 +6,50 @@
 #include "stdio.h"
 
 
+//给定一个包含 n 个整数的数组 nums 和一个目标值 target，
+//判断 nums 中是否存在四个元素 a，b，c 和 d ，
+//使得 a + b + c + d 的值与 target 相等？找出所有满足条件且不重复的四元组。
+/**
+ * Return an array of arrays of size *returnSize.
+ * The sizes of the arrays are returned as *returnColumnSizes array.
+ * Note: Both returned array and *columnSizes array must be malloced, assume caller calls free().
+ */
+int** fourSum(int* nums, int numsSize, int target, int* returnSize, int** returnColumnSizes){
+    *returnSize = 0;
+    int **res = calloc(pow(numsSize,4),sizeof(int *));
+    *returnColumnSizes = calloc(pow(numsSize,4),sizeof(int));
+    qsort(nums, numsSize, sizeof(int), cmpfunc);
+    for(int i=0; i<=numsSize-4; i++){
+        if(i!=0 && nums[i]==nums[i-1]) continue;
+        for(int j=i+1; j<numsSize; j++){
+            if(j!=i+1 && nums[j]==nums[j-1]) continue;
+            int L = j+1;
+            int R = numsSize-1;
+            while(L<R){
+                int sum = nums[i]+nums[j]+nums[L]+nums[R];
+                if(sum==target){
+                    res[*returnSize] = calloc(4,sizeof(int));
+                    res[*returnSize][0] = nums[i];
+                    res[*returnSize][1] = nums[j];
+                    res[*returnSize][2] = nums[L];
+                    res[*returnSize][3] = nums[R];
+                    (*returnColumnSizes)[*returnSize] = 4;
+                    (*returnSize)++;
+                    while(L+1<R & nums[L]==nums[L+1]) L++;
+                    while(L+1<R & nums[R]==nums[R-1]) R--;
+                    R--;
+                    L++;
+                }else if(sum>target){
+                    R--;
+                }else{
+                    L++;
+                }
+            }
+        }
+    }
+    return res;
+}
+
 ///给定一个仅包含数字 2-9 的字符串，
 //返回所有它能表示的字母组合。答案可以按 任意顺序 返回。
 //给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。
