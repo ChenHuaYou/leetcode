@@ -5,7 +5,7 @@ class ListNode:
      self.val = val
      self.next = next
 
-class Solution21:
+class Solution:
     #将两个升序链表合并为一个新的 升序 链表并返回。
     #新链表是通过拼接给定的两个链表的所有节点组成的。
     def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
@@ -15,9 +15,11 @@ class Solution21:
             return l1
 
         if l1.val > l2.val:
-            head = tail = l1
-        else:
             head = tail = l2
+            l2 = l2.next
+        else:
+            head = tail = l1
+            l1 = l1.next
 
         while (l1 is not None) or (l2 is not None):
 
@@ -25,10 +27,12 @@ class Solution21:
                 tail.next = l2
                 tail = l2
                 l2 = l2.next
+                continue
             if l2 is None:
                 tail.next = l1
                 tail = l1
                 l1 = l1.next
+                continue
 
             if l1.val > l2.val:
                 tail.next = l2
@@ -38,3 +42,4 @@ class Solution21:
                 tail.next = l1
                 tail = l1
                 l1 = l1.next
+        return head
