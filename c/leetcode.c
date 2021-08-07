@@ -5,6 +5,82 @@
 #include "leetcode.h"
 #include "stdio.h"
 
+//数字 n 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 有效的 括号组合。
+
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+
+struct parenteses{
+    char* stack;
+    int* push;
+    char* path;
+    int maxDepth;
+    char** res;
+    int* returnSize;
+    int maxRetSize;
+};
+
+void backtrace_parentheses(struct parenteses* p){
+    if(strlen(p->path) == p->maxDepth){
+        if(strlen(p->stack)==0){
+            p->res[*p->returnSize] = calloc(p->maxDepth+1, sizeof(char));
+            strcpy(p->res[*p->returnSize], p->path);
+            (*p->returnSize)++;
+            if(*p->returnSize==p->maxRetSize){
+                p->maxRetSize += 5;
+                p->res = realloc(p->res,p->maxRetSize * sizeof(char *)); 
+            }
+        }
+    }else{
+        //left '(' and right ')
+        //we go left and then right
+        p->path[strlen(p->path)] = '(';
+        p->stack[strlen(p->stack)]='(';
+        *(++p->push)= 1;
+        backtrace_parentheses(p);
+
+        if (strlen(p->path)==0) return;
+        p->path[strlen(p->path)] = ')';
+        if(strlen(p->stack)==0){
+            p->stack[strlen(p->stack)]=')';
+            *(++p->push)= 1;
+        }else if(p->stack[strlen(p->stack)-1] == '('){
+                p->stack[strlen(p->stack)-1]='\0';
+                *(++p->push) = -1;
+        }else{
+                p->stack[strlen(p->stack)]=')';
+                *(++p->push)= 1;
+        }
+        backtrace_parentheses(p);
+    }
+    //path and stack roll back to parent status
+    p->path[strlen(p->path)-1] = '\0';
+    if(*p->push==1){//if push
+        p->stack[strlen(p->stack)-1] = '\0';
+        p->push --;
+    }else if(*p->push==-1){//if pop
+        p->stack[strlen(p->stack)] = '(';
+        p->push --;
+    }
+}
+char ** generateParenthesis(int n, int* returnSize){
+    struct parenteses pt;
+    *returnSize = 0;
+    pt.maxRetSize = 5;
+    pt.returnSize = returnSize;
+    pt.maxDepth = 2*n;
+    pt.path = calloc(2*n+1, sizeof(char));
+    pt.stack = calloc(2*n+1,sizeof(char));
+    pt.res = calloc(5, sizeof(char *));
+    pt.push = calloc(2*n+1,sizeof(int));
+    backtrace_parentheses(&pt);
+    free(pt.path);
+    free(pt.stack);
+    free(pt.push);
+    return pt.res;
+}
+
 
 
 //将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 
