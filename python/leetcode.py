@@ -1,4 +1,4 @@
-
+from typing import List
 
 class ListNode:
  def __init__(self, val=0, next=None):
@@ -6,6 +6,58 @@ class ListNode:
      self.next = next
 
 class Solution:
+    #数字 n 代表生成括号的对数，请你设计一个函数，
+    #用于能够生成所有可能的并且 有效的 括号组合。
+    def generateParenthesis(self, n: int) -> List[str]:
+        class parenteses:
+            def __init__(self,
+                    stack:list = [],
+                    push:list = [],
+                    path:list = [],
+                    maxDepth:int = 0,
+                    res:list = []
+                    ):
+                pass
+                self.stack = stack
+                self.push = push
+                self.path = path
+                self.maxDepth = 2*maxDepth
+                self.res = res
+        def backtrace_parenteses(p:parenteses) -> None:
+
+            if len(p.path)==p.maxDepth:
+                if len(p.stack)==0:
+                    p.res.append(''.join(p.path))
+            else:
+                p.path.append('(')
+                p.stack.append('(')
+                p.push.append(1)
+                backtrace_parenteses(p)
+
+                if len(p.path)==0:
+                    return
+                p.path.append(')')
+                if len(p.stack)==0:
+                    p.stack.append(')')
+                    p.push.append(1)
+                elif p.stack[-1] == '(':
+                    p.stack.pop()
+                    p.push.append(-1)
+                else:
+                    p.stack.append(')')
+                    p.push.append(1)
+                backtrace_parenteses(p)
+            p.path.pop()
+            if p.push[-1] == 1:
+                p.stack.pop()
+                p.push.pop()
+            elif p.push[-1] == -1:
+                p.stack.append('(')
+                p.push.pop()
+        p = parenteses(maxDepth=n)
+        backtrace_parenteses(p)
+        return p.res
+
     #将两个升序链表合并为一个新的 升序 链表并返回。
     #新链表是通过拼接给定的两个链表的所有节点组成的。
     def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
