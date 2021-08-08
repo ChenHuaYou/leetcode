@@ -5,6 +5,52 @@
 #include "leetcode.h"
 #include "stdio.h"
 
+//输入：lists = [[1,4,5],[1,3,4],[2,6]]
+//输出：[1,1,2,3,4,4,5,6]
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+struct ListNode* mergeKLists(struct ListNode** lists, int listsSize){
+    struct ListNode* head=NULL;
+    struct ListNode* current=NULL;
+    struct ListNode* next=NULL;
+    int nullCount = 0;
+    int pos = 0;
+
+    while(true){
+        for(int i=0; i<listsSize; i++){
+            if(lists[i]==NULL) {
+                nullCount++;
+                continue;
+            }else if(next==NULL){
+                next = lists[i];
+                pos = i;
+                continue;
+            }
+            printf("%d %p %p \n",i, next, lists[i]);
+            if(next->val > lists[i]->val){
+                next = lists[i];
+                pos = i;
+            } 
+        }
+        if(nullCount==listsSize) break;
+        printf("choose %d\n",pos);
+        lists[pos] = lists[pos]->next;
+        if(head==NULL) {
+            current = head = next;
+        }else{
+            current->next = next;
+            current = next;
+        }
+        next = NULL;
+    }
+    return head;
+}
+
 //数字 n 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 有效的 括号组合。
 
 /**
@@ -700,4 +746,15 @@ char * longestCommonPrefix(char ** strs, int strsSize){
     return comPrefix;
 }
 
-
+struct ListNode* createListNodes(int* nums, int numSize){
+    if (numSize==0) return NULL;
+    struct ListNode* head = malloc(sizeof(struct ListNode));
+    struct ListNode* current = head;
+    head->val = nums[0];
+    for(int i=1; i<numSize; i++){
+       current->next = malloc(sizeof(struct ListNode));
+       current = current->next;
+       current->val = nums[i];
+    }
+    return head;
+}

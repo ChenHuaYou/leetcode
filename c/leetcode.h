@@ -1,6 +1,7 @@
 #include <stdbool.h>
 #include "uthash.h"
 
+struct ListNode* createListNodes(int* nums, int numSize);
 int myAtoi(char * s);
 bool isPalindrome(int x);
 bool isMatch(char * s, char * p);
@@ -33,3 +34,4 @@ struct HashMap{
 bool isValid(char * s);
 struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2);
 char ** generateParenthesis(int n, int* returnSize);
+struct ListNode* mergeKLists(struct ListNode** lists, int listsSize);
