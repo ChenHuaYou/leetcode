@@ -18,10 +18,10 @@ struct ListNode* mergeKLists(struct ListNode** lists, int listsSize){
     struct ListNode* head=NULL;
     struct ListNode* current=NULL;
     struct ListNode* next=NULL;
-    int nullCount = 0;
     int pos = 0;
 
     while(true){
+        int nullCount = 0;
         for(int i=0; i<listsSize; i++){
             if(lists[i]==NULL) {
                 nullCount++;
@@ -31,14 +31,14 @@ struct ListNode* mergeKLists(struct ListNode** lists, int listsSize){
                 pos = i;
                 continue;
             }
-            printf("%d %p %p \n",i, next, lists[i]);
+            //printf("%d %p %p \n",i, next, lists[i]);
             if(next->val > lists[i]->val){
                 next = lists[i];
                 pos = i;
             } 
         }
         if(nullCount==listsSize) break;
-        printf("choose %d\n",pos);
+        //printf("choose %d\n",pos);
         lists[pos] = lists[pos]->next;
         if(head==NULL) {
             current = head = next;
@@ -756,5 +756,6 @@ struct ListNode* createListNodes(int* nums, int numSize){
        current = current->next;
        current->val = nums[i];
     }
+    current->next = NULL;
     return head;
 }
