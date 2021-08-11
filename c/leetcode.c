@@ -5,6 +5,44 @@
 #include "leetcode.h"
 #include "stdio.h"
 
+
+//build max heap
+//the heap assume that child heap is max-heap
+void swap(int* a, int* b){
+    int tmp = *a;
+    *a = *b;
+    *b = tmp;
+}
+void heapify(int *arr, int size){
+    int parent = 0;
+    int child = parent*2+1;
+    while(child<size){
+        if(child+1 < size && arr[child] > arr[child+1]){
+            child ++;
+        }
+        if(arr[parent]>arr[child]){
+            return;
+        }else{
+            swap(arr+parent,arr+child);
+            parent = child;
+            child = parent * 2 + 1;
+        }
+    }
+}
+void initHeap(int *arr, int size){
+    for(int i=(size-1)/2; i<size/2; i--){
+       heapify(arr, i); 
+    }
+}
+void heapSort(int *arr, int size){
+    initHeap(arr, size);
+    while(size>1){
+        swap(arr,arr+size-1);
+        heapify(arr, --size);
+    }
+}
+
+
 //输入：lists = [[1,4,5],[1,3,4],[2,6]]
 //输出：[1,1,2,3,4,4,5,6]
 /**
