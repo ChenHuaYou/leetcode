@@ -8,16 +8,17 @@
 
 //build max heap
 //the heap assume that child heap is max-heap
-void swap(int* a, int* b){
-    int tmp = *a;
-    *a = *b;
-    *b = tmp;
+#define SWAP(TYPE, a, b) \
+void swap(TYPE a, TYPE b){\
+    TYPE tmp = *a;\
+    *a = *b;\
+    *b = tmp;\
 }
-void heapify(int *arr, int size){
-    int parent = 0;
+void heapify(int *arr, int start, int size){
+    int parent = start;
     int child = parent*2+1;
     while(child<size){
-        if(child+1 < size && arr[child] > arr[child+1]){
+        if(child+1 < size && arr[child] < arr[child+1]){
             child ++;
         }
         if(arr[parent]>arr[child]){
@@ -31,17 +32,35 @@ void heapify(int *arr, int size){
 }
 void initHeap(int *arr, int size){
     for(int i=(size-1)/2; i>=0; i--){
-       heapify(arr, i); 
+       heapify(arr, i, size); 
     }
 }
 void heapSort(int *arr, int size){
     initHeap(arr, size);
     while(size>1){
         swap(arr,arr+size-1);
-        heapify(arr, --size);
+        heapify(arr, 0, --size);
     }
 }
 
+#define HEAP_SORT_NODE(arr, size) heapSortNode(arr, size)
+
+struct ListNode* mergeKListsByHeapSort(struct ListNode** lists, int listsSize){
+    struct ListNode* head=NULL;
+    struct ListNode* current=NULL;
+    int maxSize = 3*listsSize;
+    struct ListNode** arr = calloc(maxSize, sizeof(struct ListNode*));
+    int k=0;
+    for(int i=0; i<listsSize; i++){
+        while(lists[i]!=NULL){
+           arr[k++] = lists[i]; 
+           maxSize *= 2;
+           if (k==maxSize-1) arr=realloc(arr, maxSize*sizeof(struct ListNode*));
+        }
+    }
+    heapSort(
+    return head;
+}
 
 //输入：lists = [[1,4,5],[1,3,4],[2,6]]
 //输出：[1,1,2,3,4,4,5,6]
