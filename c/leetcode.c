@@ -30,7 +30,7 @@ void heapify(int *arr, int size){
     }
 }
 void initHeap(int *arr, int size){
-    for(int i=(size-1)/2; i<size/2; i--){
+    for(int i=(size-1)/2; i>=0; i--){
        heapify(arr, i); 
     }
 }
