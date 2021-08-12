@@ -13,8 +13,8 @@ void swap(int* a, int* b){
     *a = *b;
     *b = tmp;
 }
-void heapify(int *arr, int size){
-    int parent = 0;
+void heapify(int *arr, int start, int size){
+    int parent = start;
     int child = parent*2+1;
     while(child<size){
         if(child+1 < size && arr[child] > arr[child+1]){
@@ -30,15 +30,15 @@ void heapify(int *arr, int size){
     }
 }
 void initHeap(int *arr, int size){
-    for(int i=(size-1)/2; i<size/2; i--){
-       heapify(arr, i); 
+    for(int i=(size-1)/2; i>=0; i--){
+       heapify(arr, i, size); 
     }
 }
 void heapSort(int *arr, int size){
     initHeap(arr, size);
     while(size>1){
         swap(arr,arr+size-1);
-        heapify(arr, --size);
+        heapify(arr, 0, --size);
     }
 }
 
