@@ -8,57 +8,64 @@
 
 //build max heap
 //the heap assume that child heap is max-heap
-#define SWAP(TYPE, a, b) \
-void swap(TYPE a, TYPE b){\
-    TYPE tmp = *a;\
-    *a = *b;\
-    *b = tmp;\
+void nodeSwap(struct ListNode** a, struct ListNode** b){
+    struct ListNode* tmp = *a;
+    *a = *b;
+    *b = tmp;
 }
-void heapify(int *arr, int start, int size){
+void nodeHeapify(struct ListNode** arr, int start, int size){
     int parent = start;
     int child = parent*2+1;
     while(child<size){
-        if(child+1 < size && arr[child] < arr[child+1]){
+        if(child+1 < size && arr[child]->val < arr[child+1]->val){
             child ++;
         }
-        if(arr[parent]>arr[child]){
+        if(arr[parent]->val>arr[child]->val){
             return;
         }else{
-            swap(arr+parent,arr+child);
+            nodeSwap(arr+parent,arr+child);
             parent = child;
             child = parent * 2 + 1;
         }
     }
 }
-void initHeap(int *arr, int size){
+void initHeap(struct ListNode** arr, int size){
     for(int i=(size-1)/2; i>=0; i--){
-       heapify(arr, i, size); 
+       nodeHeapify(arr, i, size); 
     }
 }
-void heapSort(int *arr, int size){
+void nodeHeapSort(struct ListNode** arr, int size){
     initHeap(arr, size);
     while(size>1){
-        swap(arr,arr+size-1);
-        heapify(arr, 0, --size);
+        nodeSwap(arr,arr+size-1);
+        nodeHeapify(arr, 0, --size);
     }
 }
 
-#define HEAP_SORT_NODE(arr, size) heapSortNode(arr, size)
-
 struct ListNode* mergeKListsByHeapSort(struct ListNode** lists, int listsSize){
+    if(listsSize==0) return NULL;
     struct ListNode* head=NULL;
-    struct ListNode* current=NULL;
     int maxSize = 3*listsSize;
     struct ListNode** arr = calloc(maxSize, sizeof(struct ListNode*));
     int k=0;
     for(int i=0; i<listsSize; i++){
         while(lists[i]!=NULL){
            arr[k++] = lists[i]; 
-           maxSize *= 2;
-           if (k==maxSize-1) arr=realloc(arr, maxSize*sizeof(struct ListNode*));
+           if (k==maxSize-1) {
+               maxSize *= 2;
+               arr=realloc(arr, maxSize*sizeof(struct ListNode*));
+           }
+           lists[i] = lists[i]->next;
         }
     }
-    heapSort(
+    if(k==0) return NULL;
+    nodeHeapSort(arr, k);
+    for(int i=0; i<k; i++){
+        arr[i]->next = arr[i+1];
+    }
+    arr[k-1]->next = NULL;
+    head = arr[0];
+    free(arr);
     return head;
 }
 

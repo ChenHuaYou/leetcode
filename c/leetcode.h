@@ -35,5 +35,4 @@ bool isValid(char * s);
 struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2);
 char ** generateParenthesis(int n, int* returnSize);
 struct ListNode* mergeKLists(struct ListNode** lists, int listsSize);
-
-void heapSort(int *arr, int size);
+struct ListNode* mergeKListsByHeapSort(struct ListNode** lists, int listsSize);
