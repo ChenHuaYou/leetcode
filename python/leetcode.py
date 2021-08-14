@@ -6,6 +6,33 @@ class ListNode:
      self.next = next
 
 class Solution:
+    def mergeKLists(self, lists):
+        import heapq
+        """
+        :type lists: List[ListNode]
+        :rtype: ListNode
+        """
+        h = []
+        l = []
+        i = 0
+        for listNode in lists:
+            while listNode is not None:
+                heapq.heappush(h,(listNode.val,i))
+                l.append(listNode)
+                i += 1
+                listNode = listNode.next
+        p = curr = None
+        j = 0
+        while j < len(l):
+            val, i = heapq.heappop(h)
+            if curr is None:
+                p = curr = l[i]
+            else:
+                curr.next = l[i]
+                curr = curr.next
+            j += 1
+        return p
+
     #数字 n 代表生成括号的对数，请你设计一个函数，
     #用于能够生成所有可能的并且 有效的 括号组合。
     def generateParenthesis(self, n: int) -> List[str]:
