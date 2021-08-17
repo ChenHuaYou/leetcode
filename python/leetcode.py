@@ -11,25 +11,20 @@ class Solution:
         :type head: ListNode
         :rtype: ListNode
         """
-        nodeList = []
         count = 0
-        while head is not None:
-            tail = head.next
-            if tail is not None:
-                nodeList.append(tail)
-                nodeList.append(head)
-                count += 2
-                head = tail.next
-            else:
-                nodeList.append(head)
+        prev = head
+        curr = head
+        while curr is not None:
+            _next = curr.next
+            if _next is not None:
+                curr.next = _next.next
+                _next.next = curr
+                if count == 0:
+                    head = _next
+                else:
+                    prev.next = _next
+                curr = curr.next
                 count += 1
-                head = head.next
-        i = 1
-        while i < count:
-            nodeList[i-1].next = nodeList[i]
-            print(nodeList[i-1].val)
-            i += 1
-        head = nodeList[0]
         return head
 
     def mergeKLists(self, lists):
