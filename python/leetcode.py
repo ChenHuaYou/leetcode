@@ -5,6 +5,19 @@ class ListNode:
      self.val = val
      self.next = next
 
+def createNodes(arr:List):
+    curr= head = ListNode(arr[0])
+    for val in arr[1:]:
+        curr.next = ListNode(val)
+        curr = curr.next
+    return head
+
+def printNodes(head):
+    while head is not None:
+        print(head.val,end=" ")
+        head = head.next
+    print("")
+
 class Solution:
     def swapPairs(self, head):
         """
@@ -14,6 +27,7 @@ class Solution:
         count = 0
         prev = head
         curr = head
+        printNodes(head)
         while curr is not None:
             _next = curr.next
             if _next is not None:
@@ -23,8 +37,12 @@ class Solution:
                     head = _next
                 else:
                     prev.next = _next
+                    prev = prev.next.next
                 curr = curr.next
                 count += 1
+            else:
+                break
+            printNodes(head)
         return head
 
     def mergeKLists(self, lists):
