@@ -27,7 +27,7 @@ class Solution:
         count = 0
         prev = head
         curr = head
-        printNodes(head)
+        #printNodes(head)
         while curr is not None:
             _next = curr.next
             if _next is not None:
@@ -42,7 +42,7 @@ class Solution:
                 count += 1
             else:
                 break
-            printNodes(head)
+            #printNodes(head)
         return head
 
     def mergeKLists(self, lists):
