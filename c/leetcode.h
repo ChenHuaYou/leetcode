@@ -36,3 +36,17 @@ struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2);
 char ** generateParenthesis(int n, int* returnSize);
 struct ListNode* mergeKLists(struct ListNode** lists, int listsSize);
 struct ListNode* mergeKListsByHeapSort(struct ListNode** lists, int listsSize);
+
+#define createNodes(arr,size)\
+    ({\
+        struct ListNode* head = malloc(sizeof(struct ListNode));\
+        head;\
+    })\
+
+#define printNodes(head)\
+    do{\
+        while(head != NULL){\
+            printf("%d ",head->val);\
+        }\
+        printf("\n");\
+    }while(0)\
