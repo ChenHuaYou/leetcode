@@ -6,6 +6,32 @@ class ListNode:
      self.next = next
 
 class Solution:
+    def swapPairs(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        nodeList = []
+        count = 0
+        while head is not None:
+            tail = head.next
+            if tail is not None:
+                nodeList.append(tail)
+                nodeList.append(head)
+                count += 2
+                head = tail.next
+            else:
+                nodeList.append(head)
+                count += 1
+                head = head.next
+        i = 1
+        while i < count:
+            nodeList[i-1].next = nodeList[i]
+            print(nodeList[i-1].val)
+            i += 1
+        head = nodeList[0]
+        return head
+
     def mergeKLists(self, lists):
         import heapq
         """
