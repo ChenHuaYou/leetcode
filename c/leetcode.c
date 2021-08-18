@@ -6,6 +6,27 @@
 #include "stdio.h"
 
 
+struct ListNode* swapPairs(struct ListNode* head){
+    struct ListNode *prev, *curr, *next;
+    prev = NULL;
+    curr = head;
+    next = NULL;
+    while(curr != NULL){
+        next = curr->next;
+        if(next==NULL) break;
+        curr->next = next->next;
+        next->next = curr;
+        if (prev==NULL){ 
+            head = prev = next;
+        }else{
+            prev->next = next;
+        }
+        prev = next->next;
+        curr = curr->next;
+    }
+    return head;
+}
+
 //build max heap
 //the heap assume that child heap is max-heap
 void nodeSwap(struct ListNode** a, struct ListNode** b){

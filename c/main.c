@@ -4,6 +4,9 @@
 #include <string.h>
 
 int main(){
-    int nums0[] = {1,2,3,4};
-    //struct ListNode* head = createNodes(nums0, 4);
+    struct ListNode* head = createNodes(5,1,2,3,4,5);
+    printNodes(head);
+    head = swapPairs(head);
+    printNodes(head);
+    freeNodes(head);
 }
