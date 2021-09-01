@@ -360,8 +360,6 @@ bool Solution::isMatch(string & s, string & p){
     return pattern.subMatch(s, 0, 0);
 }
 
-
-
 int Solution::maxArea(vector<int>& height){
     int p=0,q=height.size()-1;
     int max_area = 0;
@@ -376,4 +374,38 @@ int Solution::maxArea(vector<int>& height){
         }
     }
     return max_area;
+}
+
+ListNode* Solution::reverseKGroup(ListNode* head, int k){
+    std::stack<ListNode*> nodeStack;
+    ListNode *curr, *tail;
+    curr = head;
+    tail = nullptr;
+    head = nullptr;
+    int i = 0;
+    while(curr!=nullptr){
+       if(i%(k-1) == 0){
+            ListNode *r_curr=nullptr, *r_prev=nullptr, *r_head=nullptr;
+            for(int j=0; j<k; j++){
+                r_curr = nodeStack.top();
+                nodeStack.pop();
+                if(r_prev==nullptr) {
+                    r_head = r_prev = r_curr;
+                }else{
+                    r_prev->next = r_curr;
+                    r_prev = r_curr;
+                }
+            }
+            if(tail==nullptr){
+                head = r_head;
+            }else{
+                tail->next = r_head;
+            }
+            tail = r_curr;
+       }else{
+            nodeStack.push(curr);
+            curr = curr->next;
+       } 
+    }
+    return head;
 }
