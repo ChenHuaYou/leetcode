@@ -1,5 +1,8 @@
 #include <stdbool.h>
+#include <stdio.h>
 #include "uthash.h"
+#include <stdarg.h>
+
 
 struct ListNode* createListNodes(int* nums, int numSize);
 int myAtoi(char * s);
@@ -37,16 +40,38 @@ char ** generateParenthesis(int n, int* returnSize);
 struct ListNode* mergeKLists(struct ListNode** lists, int listsSize);
 struct ListNode* mergeKListsByHeapSort(struct ListNode** lists, int listsSize);
 
-#define createNodes(arr,size)\
-    ({\
-        struct ListNode* head = malloc(sizeof(struct ListNode));\
-        head;\
-    })\
+static inline struct ListNode* createNodes(int size,...){
+    va_list valist;
+    va_start(valist, size);
 
-#define printNodes(head)\
-    do{\
-        while(head != NULL){\
-            printf("%d ",head->val);\
-        }\
-        printf("\n");\
-    }while(0)\
+    struct ListNode* head = malloc(sizeof(struct ListNode));
+    head->val = va_arg(valist,int);
+    head->next = NULL;
+    struct ListNode* curr =  head;
+    for(int i=1;i<size;i++){
+        curr->next = malloc(sizeof(struct ListNode));
+        curr=curr->next;
+        curr->val=va_arg(valist,int);
+        curr->next=NULL;
+    }
+    return head;
+}
+
+static inline void freeNodes(struct ListNode* head){
+    while(head!=NULL) {
+        struct ListNode* tmp = head;  
+        head = head->next; 
+        free(tmp); 
+    }
+}
+
+static inline void printNodes(struct ListNode* head){
+    while(head != NULL){
+        printf("%d ",head->val);
+        head = head->next;
+    }
+    printf("\n");
+}
+
+
+struct ListNode* swapPairs(struct ListNode* head);
