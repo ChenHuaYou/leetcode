@@ -1,12 +1,12 @@
 [
 {
   "directory": "/home/mc/erp/data/leetcode/cpp",
-  "command": "/usr/bin/c++   -g -o CMakeFiles/leetcode.dir/leetcode.cpp.o -c /home/mc/erp/data/leetcode/cpp/leetcode.cpp",
+  "command": "/usr/bin/c++   -fsanitize=undefined,address,leak -fno-omit-frame-pointer -gdwarf-2 -g3 -g -o CMakeFiles/leetcode.dir/leetcode.cpp.o -c /home/mc/erp/data/leetcode/cpp/leetcode.cpp",
   "file": "/home/mc/erp/data/leetcode/cpp/leetcode.cpp"
 },
 {
   "directory": "/home/mc/erp/data/leetcode/cpp",
-  "command": "/usr/bin/c++   -g -o CMakeFiles/main.dir/main.cpp.o -c /home/mc/erp/data/leetcode/cpp/main.cpp",
+  "command": "/usr/bin/c++   -fsanitize=undefined,address,leak -fno-omit-frame-pointer -gdwarf-2 -g3 -g -o CMakeFiles/main.dir/main.cpp.o -c /home/mc/erp/data/leetcode/cpp/main.cpp",
   "file": "/home/mc/erp/data/leetcode/cpp/main.cpp"
 }
 ]

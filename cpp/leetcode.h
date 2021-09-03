@@ -19,6 +19,10 @@ struct ListNode {
 	ListNode(int x) : val(x), next(nullptr) {}
 	ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
+ListNode *createListNodes(vector<int> vec);
+void printNodes(ListNode *head);
+void freeNodes(ListNode *head);
+
 
 class Pattern{
     public:

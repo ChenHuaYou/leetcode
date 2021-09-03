@@ -844,3 +844,15 @@ struct ListNode* createListNodes(int* nums, int numSize){
     current->next = NULL;
     return head;
 }
+
+struct my_struct *users = NULL;    /* important! initialize to NULL */
+
+void add_user(int user_id, char *name) {
+    struct my_struct *s;
+
+    s = malloc(sizeof(struct my_struct));
+    s->id = user_id;
+    strcpy(s->name, name);
+    HASH_ADD_INT(users, id, s);  /* id: name of key field */
+}
+

@@ -2,6 +2,10 @@
 
 int main(){
 	Solution s;
-    vector<int> inputs = {1,8,6,2,5,4,8,3,7};
-    cout << s.maxArea(inputs) << endl;
+    vector<int> inputs = {1,2,3,4,5};
+    ListNode *head = createListNodes(inputs);
+    printNodes(head);
+    head = s.reverseKGroup(head, 2);
+    printNodes(head);
+    freeNodes(head);
 }
