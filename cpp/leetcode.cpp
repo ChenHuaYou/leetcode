@@ -378,14 +378,13 @@ int Solution::maxArea(vector<int>& height){
 
 ListNode* Solution::reverseKGroup(ListNode* head, int k){
     std::stack<ListNode*> nodeStack;
-    ListNode *curr, *tail, *f_head;
+    ListNode *curr, *tail;
     curr = head;
     tail = nullptr;
     head = nullptr;
-    f_head = nullptr;
     int i = 0;
-    while(curr!=nullptr){
-        if(i%(k+1) == k){
+    while(curr!=nullptr || nodeStack.size()==k){
+        if(nodeStack.size()==k){
             ListNode *r_curr=nullptr, *r_prev=nullptr, *r_head=nullptr;
             for(int j=0; j<k; j++){
                 r_curr = nodeStack.top();
@@ -405,7 +404,6 @@ ListNode* Solution::reverseKGroup(ListNode* head, int k){
             }
             tail = r_curr;
         }else{
-            f_head = curr;
             nodeStack.push(curr);
             curr = curr->next;
         } 
@@ -413,7 +411,10 @@ ListNode* Solution::reverseKGroup(ListNode* head, int k){
         printf("%s %d: ",__FILE__,__LINE__);
         printNodes(head);
     }
-    tail->next = f_head;
+    while(!nodeStack.empty()){
+        tail->next = nodeStack.top();
+        nodeStack.pop();
+    }
     return head;
 }
 
