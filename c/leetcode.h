@@ -28,6 +28,7 @@ struct ListNode {
     int val;
     struct ListNode *next;
 };
+typedef struct ListNode ListNode;
 struct ListNode* removeNthFromEnd(struct ListNode* head, int n);
 struct HashMap{
     int key;
@@ -82,3 +83,10 @@ struct my_struct {
     char name[10];
     UT_hash_handle hh;         /* makes this structure hashable */
 };
+
+/**
+ * 给你一个链表，每 k 个节点一组进行翻转，请你返回翻转后的链表。
+ * k是一个正整数，它的值小于或等于链表的长度。
+ * 如果节点总数不是 k 的整数倍，那么请将最后剩余的节点保持原有顺序
+ **/
+struct ListNode* reverseKGroup(struct ListNode* head, int k);

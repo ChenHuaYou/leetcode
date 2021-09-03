@@ -856,3 +856,46 @@ void add_user(int user_id, char *name) {
     HASH_ADD_INT(users, id, s);  /* id: name of key field */
 }
 
+
+struct ListNode* reverseKGroup(struct ListNode* head, int k){
+    ListNode **nodeStack = calloc(k, sizeof(ListNode*));
+    ListNode *curr, *tail;
+    curr = head;
+    tail = NULL;
+    head = NULL;
+    int i = -1;
+    ListNode *r_curr,*r_prev,*r_head;
+    while(curr!=NULL || i==k-1){
+        if(i==k-1){
+            r_curr=r_prev=r_head=NULL;
+            while(i>-1){
+                r_curr = nodeStack[i];
+                r_curr->next = NULL;
+                if(r_prev==NULL) {
+                    r_head = r_prev = r_curr;
+                }else{
+                    r_prev->next = r_curr;
+                    r_prev = r_curr;
+                }
+                i--;
+            }
+            if(tail==NULL){
+                head = r_head;
+            }else{
+                tail->next = r_head;
+            }
+            tail = r_curr;
+        }else{
+            nodeStack[++i]=curr;
+            curr = curr->next;
+        } 
+        printf("%s %d: ",__FILE__,__LINE__);
+        printNodes(head);
+    }
+    if(i>-1 && i<k-1){
+        tail->next = nodeStack[0];
+    }
+    free(nodeStack);
+    return head;
+
+}
