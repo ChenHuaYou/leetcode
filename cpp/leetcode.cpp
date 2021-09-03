@@ -377,18 +377,17 @@ int Solution::maxArea(vector<int>& height){
 }
 
 ListNode* Solution::reverseKGroup(ListNode* head, int k){
-    std::stack<ListNode*> nodeStack;
+    ListNode *nodeStack[k];
     ListNode *curr, *tail;
     curr = head;
     tail = nullptr;
     head = nullptr;
-    int i = 0;
-    while(curr!=nullptr || nodeStack.size()==k){
-        if(nodeStack.size()==k){
+    int i = -1;
+    while(curr!=nullptr || i==k-1){
+        if(i==k-1){
             ListNode *r_curr=nullptr, *r_prev=nullptr, *r_head=nullptr;
-            for(int j=0; j<k; j++){
-                r_curr = nodeStack.top();
-                nodeStack.pop();
+            while(i>-1){
+                r_curr = nodeStack[i];
                 r_curr->next = nullptr;
                 if(r_prev==nullptr) {
                     r_head = r_prev = r_curr;
@@ -396,6 +395,7 @@ ListNode* Solution::reverseKGroup(ListNode* head, int k){
                     r_prev->next = r_curr;
                     r_prev = r_curr;
                 }
+                i--;
             }
             if(tail==nullptr){
                 head = r_head;
@@ -404,16 +404,14 @@ ListNode* Solution::reverseKGroup(ListNode* head, int k){
             }
             tail = r_curr;
         }else{
-            nodeStack.push(curr);
+            nodeStack[++i]=curr;
             curr = curr->next;
         } 
-        i++;
         printf("%s %d: ",__FILE__,__LINE__);
         printNodes(head);
     }
-    while(!nodeStack.empty()){
-        tail->next = nodeStack.top();
-        nodeStack.pop();
+    if(i>-1 && i<k-1){
+        tail->next = nodeStack[0];
     }
     return head;
 }
