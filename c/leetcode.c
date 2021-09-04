@@ -908,10 +908,11 @@ void printIntVec(int* nums, int length){
     printf("\n");
 }
 
-int erase(int nums[], int start, int end, int length){
-    for(int i=end+1; i<length; i++){
-        nums[start+i-end] = nums[i];
-    }
+int erase(int *nums, int start, int end, int length){
+    //for(int i=end+1; i<length; i++){
+    //    nums[start+i-end] = nums[i];
+    //}
+    memmove(&nums[start+1],&nums[end+1],(length-end-1)*sizeof(int));
     return length - (end-start);
 }
 
