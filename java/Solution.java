@@ -93,29 +93,20 @@ class Solution {
     }
 
     public int removeDuplicates(int[] nums) {
-        int i=1;
-        int n_duplicate = 0;
-        int start = 0;
-        int end = 0;
-        int length = nums.length;
+        int slow = 1;
+        int fast = 1;
+        int numsSize = nums.length;
 
-        while(i<length+1){
-            printIntVec(nums,length);
-            if(i < length && nums[i]==nums[start]){
-                n_duplicate ++;
-                i ++;
-                continue;
+        while(fast<numsSize){
+            printIntVec(nums,numsSize);
+            if(nums[fast]!=nums[fast-1]){
+                nums[slow] = nums[fast];
+                slow++;
             }
-            end = start + n_duplicate;
-            //printf("i: %d, start: %d, end: %d, n_dup: %d\n", i, start, end, n_duplicate);
-            length = erase(nums,start,end, length);
-            i = i - n_duplicate;
-            start = i;
-            i ++;
-            //printf("start: %d, next i:%d\n",start, i);
-            n_duplicate = 0;
+            fast++;
         }
-        return length;
+        return slow;
+
     }
     public static void main(String[] args){
         //ArrayList<Integer> nums = new ArrayList<Integer>();
