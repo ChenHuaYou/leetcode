@@ -161,3 +161,33 @@ class Solution:
                 tail = l1
                 l1 = l1.next
         return head
+    #给你一个链表，每 k 个节点一组进行翻转，请你返回翻转后的链表。
+    #k 是一个正整数，它的值小于或等于链表的长度。
+    #如果节点总数不是 k 的整数倍，那么请将最后剩余的节点保持原有顺序。
+    def reverseKGroup(self, head: ListNode, k: int) -> ListNode:
+        nodeStack = []
+        curr = head
+        tail = None
+        head = None
+        while curr!=None or len(nodeStack)==k:
+            if len(nodeStack)==k:
+                r_curr=r_prev=r_head=None
+                while bool(nodeStack):
+                    r_curr = nodeStack.pop()
+                    r_curr.next = None
+                    if r_prev==None:
+                        r_head = r_prev = r_curr
+                    else:
+                        r_prev.next = r_curr
+                        r_prev = r_curr
+                if tail==None:
+                    head = r_head
+                else:
+                    tail.next = r_head
+                tail = r_curr
+            else:
+                nodeStack.append(curr)
+                curr = curr.next
+        if bool(nodeStack):
+            tail.next = nodeStack[0]
+        return head
