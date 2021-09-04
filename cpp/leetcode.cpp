@@ -455,26 +455,17 @@ void printIntVec(vector<int>& nums){
 }
 
 int Solution::removeDuplicates(vector<int>& nums){
-    int i=1;
-    int n_duplicate = 0;
-    int start = 0;
-    int end = 0;
-
-    while(i<nums.size()+1){
+    int slow = 1;
+    int fast = 1;
+    int numsSize = nums.size();
+    if(numsSize==0)return 0;
+    while(fast<numsSize){
         printIntVec(nums);
-        if(i < nums.size() && nums[i]==nums[start]){
-            n_duplicate ++;
-            i ++;
-            continue;
+        if(nums[fast]!=nums[fast-1]){
+            nums[slow] = nums[fast];
+            slow++;
         }
-        end = start + n_duplicate;
-        //printf("i: %d, start: %d, end: %d, n_dup: %d\n", i, start, end, n_duplicate);
-        nums.erase(nums.begin()+start,nums.begin()+end);
-        i = i - n_duplicate;
-        start = i;
-        i ++;
-        //printf("start: %d, next i:%d\n",start, i);
-        n_duplicate = 0;
+        fast++;
     }
-    return nums.size();
+    return slow;
 }
