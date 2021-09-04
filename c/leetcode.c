@@ -899,3 +899,43 @@ struct ListNode* reverseKGroup(struct ListNode* head, int k){
     return head;
 
 }
+
+
+void printIntVec(int* nums, int length){
+    for(int i=0; i<length; i++){
+        printf("%d ",nums[i]);
+    }
+    printf("\n");
+}
+
+int erase(int nums[], int start, int end, int length){
+    for(int i=end+1; i<length; i++){
+        nums[start+i-end] = nums[i];
+    }
+    return length - (end-start);
+}
+
+int removeDuplicates(int* nums, int numsSize){
+    int i=1;
+    int n_duplicate = 0;
+    int start = 0;
+    int end = 0;
+    int length = numsSize;
+
+    while(i<length+1){
+        printIntVec(nums,length);
+        if(i < length && nums[i]==nums[start]){
+            n_duplicate ++;
+            i ++;
+            continue;
+        }
+        end = start + n_duplicate;
+        length = erase(nums,start,end, length);
+        i = i - n_duplicate;
+        start = i;
+        i ++;
+        n_duplicate = 0;
+    }
+    return length;
+}
+

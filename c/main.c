@@ -5,10 +5,8 @@
 
 
 int main(){
-    int nums[6] = {1,2,3,4,5,6};
-    ListNode *head = createListNodes(nums,6);
-    printNodes(head);
-    head = reverseKGroup(head, 3);
-    printNodes(head);
-    freeNodes(head);
+    int nums[] = {1,1,1,2,2,2,3,3};
+    printIntVec(nums,8);
+    int length = removeDuplicates(nums, 8);
+    printIntVec(nums,length);
 }
