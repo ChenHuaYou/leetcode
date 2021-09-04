@@ -476,5 +476,5 @@ int Solution::removeDuplicates(vector<int>& nums){
         //printf("start: %d, next i:%d\n",start, i);
         n_duplicate = 0;
     }
-    return 0;
+    return nums.size();
 }

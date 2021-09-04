@@ -75,20 +75,62 @@ class Solution {
         }
         System.out.print("\n");
     }
+    /**
+     *给你一个有序数组 nums ，请你 原地 删除重复出现的元素，使每个元素 只出现一次 ，返回删除后数组的新长度。
+     *不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。
+     **/
+    void printIntVec(int[] nums, int length){
+        for(int i=0; i<length; i++){
+            System.out.print(nums[i]+" ");
+        }
+        System.out.print("\n");
+    }
+    int erase(int nums[], int start, int end, int length){
+        for(int i=end+1; i<nums.length; i++){
+            nums[start+i-end] = nums[i];
+        }
+        return length - (end-start);
+    }
+
+    public int removeDuplicates(int[] nums) {
+        int i=1;
+        int n_duplicate = 0;
+        int start = 0;
+        int end = 0;
+        int length = nums.length;
+
+        while(i<length+1){
+            printIntVec(nums,length);
+            if(i < length && nums[i]==nums[start]){
+                n_duplicate ++;
+                i ++;
+                continue;
+            }
+            end = start + n_duplicate;
+            //printf("i: %d, start: %d, end: %d, n_dup: %d\n", i, start, end, n_duplicate);
+            length = erase(nums,start,end, length);
+            i = i - n_duplicate;
+            start = i;
+            i ++;
+            //printf("start: %d, next i:%d\n",start, i);
+            n_duplicate = 0;
+        }
+        return length;
+    }
     public static void main(String[] args){
-        ArrayList<Integer> nums = new ArrayList<Integer>();
-        nums.add(1);
-        nums.add(2);
-        nums.add(3);
-        nums.add(4);
-        nums.add(5);
-        nums.add(6);
-        nums.add(7);
-        nums.add(8);
+        //ArrayList<Integer> nums = new ArrayList<Integer>();
+        //nums.add(1);
+        //nums.add(2);
+        //nums.add(3);
+        //nums.add(4);
+        //nums.add(5);
+        //nums.add(6);
+        //nums.add(7);
+        //nums.add(8);
+        int[] nums = {1,1,1,2,2,2,3,3};
         Solution solution = new Solution();
-        ListNode head = solution.createNodes(nums);
-        solution.printNodes(head);
-        head = solution.reverseKGroup(head, 3);
-        solution.printNodes(head);
+        solution.printIntVec(nums,nums.length);
+        int length = solution.removeDuplicates(nums);
+        solution.printIntVec(nums,length);
     }
 }
