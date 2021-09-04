@@ -22,6 +22,7 @@ struct ListNode {
 ListNode *createListNodes(vector<int> vec);
 void printNodes(ListNode *head);
 void freeNodes(ListNode *head);
+void printIntVec(vector<int>& nums);
 
 
 class Pattern{
@@ -55,7 +56,10 @@ class Solution{
          * k 是一个正整数，它的值小于或等于链表的长度。
          * 如果节点总数不是 k 的整数倍，那么请将最后剩余的节点保持原有顺序。
          */
-         ListNode* reverseKGroup(ListNode* head, int k);
-
-
+        ListNode* reverseKGroup(ListNode* head, int k);
+        /**
+         *给你一个有序数组 nums ，请你 原地 删除重复出现的元素，使每个元素 只出现一次 ，返回删除后数组的新长度。
+         *不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。
+         **/
+        int removeDuplicates(vector<int>& nums);
 };
