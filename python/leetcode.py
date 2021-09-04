@@ -207,23 +207,15 @@ class Solution:
         print("\n")
 
     def removeDuplicates(self, nums: List[int]) -> int:
-        i=1
-        n_duplicate = 0
-        start = 0
-        end = 0
-        length = len(nums)
+        slow = 1
+        fast = 1
+        numsSize = len(nums)
 
-        while i<length+1:
-            self.printIntVec(nums,length)
-            if i < length and nums[i]==nums[start]:
-                n_duplicate += 1
-                i += 1
-                continue
-            end = start + n_duplicate
-            length = self.erase(nums,start,end, length)
-            i = i - n_duplicate
-            start = i
-            i +=1
-            n_duplicate = 0
-        return length
+        while fast<numsSize:
+            self.printIntVec(nums,numsSize)
+            if nums[fast]!=nums[fast-1]:
+                nums[slow] = nums[fast]
+                slow += 1
+            fast += 1
+        return slow
 
