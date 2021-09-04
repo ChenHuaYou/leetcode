@@ -917,26 +917,17 @@ int erase(int *nums, int start, int end, int length){
 }
 
 int removeDuplicates(int* nums, int numsSize){
-    int i=1;
-    int n_duplicate = 0;
-    int start = 0;
-    int end = 0;
-    int length = numsSize;
+    int slow = 1;
+    int fast = 1;
 
-    while(i<length+1){
-        printIntVec(nums,length);
-        if(i < length && nums[i]==nums[start]){
-            n_duplicate ++;
-            i ++;
-            continue;
+    while(fast<numsSize){
+        printIntVec(nums,numsSize);
+        if(nums[fast]!=nums[fast-1]){
+            nums[slow] = nums[fast];
+            slow++;
         }
-        end = start + n_duplicate;
-        length = erase(nums,start,end, length);
-        i = i - n_duplicate;
-        start = i;
-        i ++;
-        n_duplicate = 0;
+        fast++;
     }
-    return length;
+    return slow;
 }
 
