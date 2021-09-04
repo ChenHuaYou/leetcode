@@ -191,3 +191,39 @@ class Solution:
         if bool(nodeStack):
             tail.next = nodeStack[0]
         return head
+    #给你一个有序数组 nums ，请你 原地 删除重复出现的元素，使每个元素 只出现一次 ，返回删除后数组的新长度。
+    #不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。
+    def erase(self, nums: List[int], start:int, end:int, length:int)->int:
+        i = end+1
+        while i < length:
+            nums[start+i-end] = nums[i]
+            i += 1
+        return length - (end-start)
+    def printIntVec(self, nums:List[int], length:int)->None:
+        i = 0
+        while i< length:
+            print(nums[i],end=" ")
+            i += 1
+        print("\n")
+
+    def removeDuplicates(self, nums: List[int]) -> int:
+        i=1
+        n_duplicate = 0
+        start = 0
+        end = 0
+        length = len(nums)
+
+        while i<length+1:
+            self.printIntVec(nums,length)
+            if i < length and nums[i]==nums[start]:
+                n_duplicate += 1
+                i += 1
+                continue
+            end = start + n_duplicate
+            length = self.erase(nums,start,end, length)
+            i = i - n_duplicate
+            start = i
+            i +=1
+            n_duplicate = 0
+        return length
+
