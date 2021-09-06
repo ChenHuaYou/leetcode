@@ -482,7 +482,8 @@ int Solution::removeElement(vector<int>& nums, int val){
             }
         }
     }
-    nums.erase(nums.begin()+start, nums.begin()+end+1);
-    int newLen = nums.size() - (end+1-start);
-    return newLen;
+    if(start!=-1){
+        nums.erase(nums.begin()+start, nums.begin()+end+1);
+    }
+    return nums.size();
 }
