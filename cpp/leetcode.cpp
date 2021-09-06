@@ -469,3 +469,20 @@ int Solution::removeDuplicates(vector<int>& nums){
     }
     return slow;
 }
+
+int Solution::removeElement(vector<int>& nums, int val){
+    sort(nums.begin(),nums.end()); 
+    int start=-1, end=-1;
+    for(int i=0; i<nums.size(); i++){
+        if(nums[i]==val){
+            if(start==-1) {
+                start = end = i;
+            }else{
+                end = i;
+            }
+        }
+    }
+    nums.erase(nums.begin()+start, nums.begin()+end+1);
+    int newLen = nums.size() - (end+1-start);
+    return newLen;
+}
