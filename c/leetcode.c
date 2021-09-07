@@ -908,11 +908,13 @@ void printIntVec(int* nums, int length){
     printf("\n");
 }
 
+/**
+ * 删除[start,end)区间的元素
+ * */
 int erase(int *nums, int start, int end, int length){
-    //for(int i=end+1; i<length; i++){
-    //    nums[start+i-end] = nums[i];
-    //}
-    memmove(&nums[start+1],&nums[end+1],(length-end-1)*sizeof(int));
+    for(int i=end; i<length; i++){
+        nums[start+i-end] = nums[i];
+    }
     return length - (end-start);
 }
 
@@ -931,3 +933,21 @@ int removeDuplicates(int* nums, int numsSize){
     return slow;
 }
 
+int removeElement(int* nums, int numsSize, int val){
+    qsort(nums, numsSize, sizeof(int), cmpfunc);
+    int start=-1, end=-1;
+    for(int i=0; i<numsSize; i++){
+        if(nums[i]==val){
+            if(start==-1) {
+                start = end = i;
+            }else{
+                end = i;
+            }
+        }
+    }
+    int newLen = -1;
+    if(start!=-1){
+        newLen = erase(nums, start, end+1, numsSize);
+    }
+    return newLen;
+}
