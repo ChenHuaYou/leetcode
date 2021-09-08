@@ -191,7 +191,8 @@ class Solution:
         if bool(nodeStack):
             tail.next = nodeStack[0]
         return head
-    #给你一个有序数组 nums ，请你 原地 删除重复出现的元素，使每个元素 只出现一次 ，返回删除后数组的新长度。
+    #给你一个有序数组 nums ，请你 原地 删除重复出现的元素，
+    #使每个元素 只出现一次 ，返回删除后数组的新长度。
     #不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。
     def erase(self, nums: List[int], start:int, end:int, length:int)->int:
         i = end+1
@@ -218,4 +219,20 @@ class Solution:
                 slow += 1
             fast += 1
         return slow
-
+    #  给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，
+    #  并返回移除后数组的新长度。
+    #  不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。
+    #  元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素
+    def removeElement(self, nums: List[int], val: int) -> int:
+        nums.sort()
+        start=-1;end=-1;
+        for i,e in enumerate(nums):
+            if nums[i]==val:
+                if start==-1:
+                    start = end = i
+                else:
+                    end = i
+        newLen = len(nums);
+        if start!=-1:
+            newLen = self.erase(nums, start-1, end, len(nums));
+        return newLen;

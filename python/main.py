@@ -3,10 +3,10 @@ from leetcode import *
 
 if __name__ == '__main__':
 
-    nums = [1,1,1,2,2,2,3,3]
+    nums = [3,2,2,3]
     s = Solution()
     s.printIntVec(nums, len(nums))
-    length = s.removeDuplicates(nums)
+    length = s.removeElement(nums,3)
     s.printIntVec(nums, length)
     
 

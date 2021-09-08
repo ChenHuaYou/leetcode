@@ -128,24 +128,15 @@ class Solution {
         }
         int newLen = nums.length;
         if(start!=-1){
-            newLen = erase(nums, start, end, nums.length);
+            newLen = erase(nums, start-1, end, nums.length);
         }
         return newLen;
     }
     public static void main(String[] args){
-        //ArrayList<Integer> nums = new ArrayList<Integer>();
-        //nums.add(1);
-        //nums.add(2);
-        //nums.add(3);
-        //nums.add(4);
-        //nums.add(5);
-        //nums.add(6);
-        //nums.add(7);
-        //nums.add(8);
-        int[] nums = {1,1,1,2,2,2,3,3};
+        int[] nums = {3,2,2,3};
         Solution solution = new Solution();
         solution.printIntVec(nums,nums.length);
-        int length = solution.removeElement(nums, 1);
+        int length = solution.removeElement(nums, 3);
         solution.printIntVec(nums,length);
     }
 }
