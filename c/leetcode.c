@@ -945,7 +945,7 @@ int removeElement(int* nums, int numsSize, int val){
             }
         }
     }
-    int newLen = -1;
+    int newLen = numsSize;
     if(start!=-1){
         newLen = erase(nums, start, end+1, numsSize);
     }
