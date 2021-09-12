@@ -2,8 +2,8 @@
 
 int main(){
 	Solution s;
-    string haystack = "hello";
-    string needle = "ll";
+    string haystack = "mississippi";
+    string needle = "issip";
     int index = s.strStr(haystack, needle);
     printf("index is : %d\n",index);
 }
