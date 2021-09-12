@@ -487,3 +487,27 @@ int Solution::removeElement(vector<int>& nums, int val){
     }
     return nums.size();
 }
+
+
+int Solution::strStr(string haystack, string needle){
+    if(needle.size()==0) return 0;
+    int i=0;
+    while(i<haystack.size()){
+        if (needle[0] != haystack[i]) {
+            i++;
+            continue;
+        }
+        int j=0;
+        while(j<needle.size()){
+            if(haystack[i]!=needle[j]){
+                break;
+            }
+            i++;
+            j++;
+        }
+        if (j==needle.size()){
+            return i-j;
+        }
+    }
+    return -1;
+}

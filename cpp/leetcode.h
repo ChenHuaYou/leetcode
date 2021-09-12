@@ -70,4 +70,10 @@ class Solution{
           元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素
          **/
         int removeElement(vector<int>& nums, int val) ;
+        /**
+        给你两个字符串 haystack 和 needle ，请你在 haystack 字符串中找出 
+        needle 字符串出现的第一个位置（下标从 0 开始）。如果不存在，则返回  -1 。
+        **/
+        int strStr(string haystack, string needle);
+
 };
