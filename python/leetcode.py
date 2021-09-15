@@ -236,3 +236,42 @@ class Solution:
         if start!=-1:
             newLen = self.erase(nums, start-1, end, len(nums));
         return newLen;
+
+    def kmp_table(self,pattern:str)->List[int]:
+        pos:int = 1;
+        cnd:int = 0;
+        T:List[int] = [0]*len(pattern)
+        T[0] = -1;
+        patternSize:int = len(pattern);
+        while pos < patternSize:
+            if pattern[cnd]==pattern[pos]:
+                T[pos] = T[cnd]
+            else:
+                T[pos] = cnd
+                while cnd>=0 and pattern[pos] != pattern[cnd]:
+                    cnd = T[cnd];
+            pos += 1
+            cnd += 1
+        return T
+    def strStr(self, haystack: str, needle: str) -> int:
+        haystackSize:int = len(haystack)
+        needleSize:int = len(needle);
+        if needleSize==0:
+            return 0
+        j:int = 0;
+        k:int = 0;
+        m:int = -1;
+        T:List[int] = self.kmp_table(needle);
+        while j<haystackSize:
+            if needle[k]==haystack[j]:
+                j += 1
+                k += 1
+                if k==needleSize:
+                    m = j-k
+                    break
+            else:
+                k = T[k]
+                if k<0:
+                    j += 1
+                    k += 1
+        return m
