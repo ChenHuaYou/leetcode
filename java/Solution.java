@@ -132,11 +132,52 @@ class Solution {
         }
         return newLen;
     }
+    int[] kmp_table(String pattern){
+        int pos = 1;
+        int cnd = 0;
+        int[] T = new int[pattern.length()];
+        T[0] = -1;
+        while(pos < pattern.length()){
+            if(pattern.charAt(cnd)==pattern.charAt(pos)){
+                T[pos] = T[cnd];            
+            }else{
+                T[pos] = cnd;
+                while(cnd>=0 && pattern.charAt(pos) != pattern.charAt(cnd)){
+                    cnd = T[cnd];
+                }
+            }
+            pos ++;
+            cnd ++;
+        }
+        return T;
+    }
+    public int strStr(String haystack, String needle) {
+        if(needle.length()==0) return 0;
+        int j = 0;
+        int k = 0;
+        int[] T = kmp_table(needle);
+        while(j<haystack.length()){
+            if(needle.charAt(k)==haystack.charAt(j)){
+                j++;
+                k++;
+                if(k==needle.length()){
+                    return j-k;
+                }
+            }else{
+                k = T[k];
+                if(k<0){
+                    j++;
+                    k++;
+                }
+            }
+        }
+        return -1;
+    }
     public static void main(String[] args){
-        int[] nums = {3,2,2,3};
-        Solution solution = new Solution();
-        solution.printIntVec(nums,nums.length);
-        int length = solution.removeElement(nums, 3);
-        solution.printIntVec(nums,length);
+        Solution s = new Solution();
+        String haystack = "ABC ABCDAB ABCDABCDABDE";
+        String needle = "ABCDABD";
+        int p = s.strStr(haystack, needle);
+        System.out.println("index: "+p);
     }
 }
