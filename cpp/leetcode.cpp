@@ -491,24 +491,43 @@ int Solution::removeElement(vector<int>& nums, int val){
 
 int Solution::strStr(string haystack, string needle){
     if(needle.size()==0) return 0;
-    int i=0;
-    while(i<haystack.size()){
-        printf("i: %d\n",i);
-        if (needle[0] != haystack[i]) {
-            i++;
-            continue;
-        }
-        int j=0;
-        while(j<needle.size()){
-            if(haystack[i+j]!=needle[j]){
-                break;
-            }
+    int j = 0;
+    int k = 0;
+    vector<int> T = kmp_table(needle);
+    while(j<haystack.size()){
+        if(needle[k]==haystack[j]){
             j++;
+            k++;
+            if(k==needle.size()){
+                return j-k;
+            }
+        }else{
+            k = T[k];
+            if(k<0){
+                j++;
+                k++;
+            }
         }
-        if (j==needle.size()){
-            return i;
-        }
-        i++;
     }
     return -1;
+}
+
+vector<int> kmp_table(string pattern){
+    int pos = 1;
+    int cnd = 0;
+    vector<int> T(pattern.size(),0);
+    T[0] = -1;
+    while(pos < pattern.size()){
+        if(pattern[cnd]==pattern[pos]){
+            T[pos] = T[cnd];            
+        }else{
+            T[pos] = cnd;
+            while(cnd>=0 && pattern[pos] != pattern[cnd]){
+                cnd = T[cnd];
+            }
+        }
+        pos ++;
+        cnd ++;
+    }
+    return T;
 }

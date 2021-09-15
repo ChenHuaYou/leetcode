@@ -77,3 +77,5 @@ class Solution{
         int strStr(string haystack, string needle);
 
 };
+
+vector<int> kmp_table(string pattern);
