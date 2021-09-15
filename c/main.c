@@ -5,8 +5,9 @@
 
 
 int main(){
-    int nums[] = {1,1,1,2,2,2,3,3};
-    printIntVec(nums,8);
-    int length = removeElement(nums, 8, 1);
-    printIntVec(nums,length);
+
+    char *haystack = "ABC ABCDAB ABCDABCDABDE";
+    char *needle = "ABCDABD";
+    int index = strStr(haystack, needle);
+    printf("index is : %d",index);
 }

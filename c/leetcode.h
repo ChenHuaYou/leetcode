@@ -103,3 +103,5 @@ void printIntVec(int *nums, int length);
   元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素
  **/
 int removeElement(int* nums, int numsSize, int val);
+int strStr(char * haystack, char * needle);
+int *kmp_table(const char *pattern);

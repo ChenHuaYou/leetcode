@@ -951,3 +951,51 @@ int removeElement(int* nums, int numsSize, int val){
     }
     return newLen;
 }
+
+
+int strStr(char * haystack, char * needle){
+    if(strlen(needle)==0) return 0;
+    int j = 0;
+    int k = 0;
+    int m = -1;
+    int *T = kmp_table(needle);
+    while(j<strlen(haystack)){
+        if(needle[k]==haystack[j]){
+            j++;
+            k++;
+            if(k==strlen(needle)){
+                m = j-k;
+                break;
+            }
+        }else{
+            k = T[k];
+            if(k<0){
+                j++;
+                k++;
+            }
+        }
+    }
+    free(T);
+    return m;
+}
+
+int *kmp_table(const char * pattern){
+    int pos = 1;
+    int cnd = 0;
+    int *T = calloc(strlen(pattern),sizeof(int));
+    T[0] = -1;
+    while(pos < strlen(pattern)){
+        if(pattern[cnd]==pattern[pos]){
+            T[pos] = T[cnd];            
+        }else{
+            T[pos] = cnd;
+            while(cnd>=0 && pattern[pos] != pattern[cnd]){
+                cnd = T[cnd];
+            }
+        }
+        pos ++;
+        cnd ++;
+    }
+    //printIntVec(T, strlen(pattern));
+    return T;
+}
