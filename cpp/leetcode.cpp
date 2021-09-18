@@ -551,7 +551,11 @@ int Solution::divide(int dividend, int divisor){
     if (divisor==1) {
         return dividend;
     }else if(divisor==-1){
-        return myabs(dividend);
+        if(sgn){
+            return -dividend;
+        }else{
+            return myabs(dividend);
+        }
     }
     divisor = myabs(divisor);
     dividend = myabs(dividend);
