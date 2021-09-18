@@ -2,8 +2,6 @@
 
 int main(){
 	Solution s;
-    string haystack = "ABC ABCDAB ABCDABCDABDE";
-    string needle = "ABCDABD";
-    int p = s.strStr(haystack, needle);
+    int p = s.divide(10, 3);
     printf("index: %d",p);
 }

@@ -75,6 +75,7 @@ class Solution{
         needle 字符串出现的第一个位置（下标从 0 开始）。如果不存在，则返回  -1 。
         **/
         int strStr(string haystack, string needle);
+        int divide(int dividend, int divisor);
 
 };
 
