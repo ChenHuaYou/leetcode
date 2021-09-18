@@ -533,13 +533,30 @@ vector<int> kmp_table(string pattern){
 }
 
 
+static inline int myabs(int val){
+    if(val<=-2147483648){
+        val = 2147483647;
+    }else if(val<0){
+        val = -val;
+    }else if(val>2147483647){
+        val = 2147483647;
+    }
+    return val;
+}
 int Solution::divide(int dividend, int divisor){
     bool sgn = false;
     if (dividend >0 && divisor <0 || dividend <0 && divisor >0){
         sgn = true;
     }
-    dividend = std::abs(dividend);
-    divisor = std::abs(divisor); 
+    dividend = myabs(dividend);
+    divisor = myabs(divisor);
+    if (divisor==1) {
+        if(sgn) {
+            return -dividend;
+        }else{
+            return dividend;
+        }
+    }
     int quotient = 0;
     while (divisor<=dividend){
         quotient ++;
