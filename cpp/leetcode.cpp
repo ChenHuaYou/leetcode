@@ -548,15 +548,13 @@ int Solution::divide(int dividend, int divisor){
     if (dividend >0 && divisor <0 || dividend <0 && divisor >0){
         sgn = true;
     }
-    dividend = myabs(dividend);
-    divisor = myabs(divisor);
     if (divisor==1) {
-        if(sgn) {
-            return -dividend;
-        }else{
-            return dividend;
-        }
+        return dividend;
+    }else if(divisor==-1){
+        return myabs(dividend);
     }
+    divisor = myabs(divisor);
+    dividend = myabs(dividend);
     int quotient = 0;
     while (divisor<=dividend){
         quotient ++;
