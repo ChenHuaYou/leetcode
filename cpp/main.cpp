@@ -2,6 +2,7 @@
 
 int main(){
 	Solution s;
-    int p = s.divide(-10, 3);
+    
+    int p = s.divide(-2147483648, 1);
     printf("index: %d\n",p);
 }

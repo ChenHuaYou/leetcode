@@ -1,4 +1,5 @@
 #include "leetcode.h"
+#include <cstdint>
 
 
 using namespace std;
@@ -536,26 +537,34 @@ vector<int> kmp_table(string pattern){
 // 补码
 int Solution::divide(int dividend, int divisor){
     int sgn = 1;
+    int64_t _dividend = dividend;
+    int64_t _divisor = divisor;
     if(dividend<0){
         sgn = -sgn;
-        dividend = ~dividend + 1;
+        _dividend = ~_dividend + 1;
     }
     if(divisor<0){
         sgn = -sgn;
-        divisor = ~divisor + 1;
+        _divisor = ~_divisor + 1;
     }
+    //printf("%d\n",sgn);
     int quotient=0;
+    int64_t _quotient=0;
     int Q = 0;
     int H=0;
     int mod=0;
     for(int i=31;i>=0; i--){
-        H = dividend >> i & 1;
+        H = _dividend >> i & 1;
         mod = (mod << 1) + H;
-        Q = mod >= divisor? 1:0;
-        mod = mod >= divisor? mod-divisor:mod;
-        printf("dividend: %d, divisor: %d, H: %d, Q: %d\n",dividend, divisor, H, Q);
-        quotient = (quotient << 1) + Q;
+        Q = mod >= _divisor? 1:0;
+        mod = mod >= _divisor? mod-_divisor:mod;
+        //printf("dividend: %ld, divisor: %ld, H: %d, Q: %d\n",_dividend, _divisor, H, Q);
+        _quotient = (_quotient << 1) + Q;
+        //printf("quotient: %ld\n",_quotient);
     }
-    if(sgn<0) quotient = ~quotient + 1;
+    if(sgn<0) _quotient = ~_quotient + 1;
+    //printf("quotient: %ld\n",_quotient);
+    if(_quotient>INT32_MAX) _quotient = INT32_MAX;
+    quotient = _quotient;
     return quotient;
 }
