@@ -532,39 +532,19 @@ vector<int> kmp_table(string pattern){
     return T;
 }
 
-
-static inline int myabs(int val){
-    if(val<=-2147483648){
-        val = 2147483647;
-    }else if(val<0){
-        val = -val;
-    }else if(val>2147483647){
-        val = 2147483647;
-    }
-    return val;
-}
+// 转成2进制 1010 / 11 = ?
 int Solution::divide(int dividend, int divisor){
-    bool sgn = false;
-    if (dividend >0 && divisor <0 || dividend <0 && divisor >0){
-        sgn = true;
+    int quotient=0;
+    int Q = 0;
+    int H=0;
+    int mod=0;
+    for(int i=31;i>=0; i--){
+        H = dividend >> i & 1;
+        mod = (mod << 1) + H;
+        Q = mod >= divisor? 1:0;
+        mod = mod >= divisor? mod-divisor:mod;
+        printf("dividend: %d, divisor: %d, H: %d, Q: %d\n",dividend, divisor, H, Q);
+        quotient = (quotient << 1) + Q;
     }
-    if (divisor==1) {
-        return dividend;
-    }else if(divisor==-1){
-        if(sgn){
-            return -dividend;
-        }else{
-            return myabs(dividend);
-        }
-    }
-    divisor = myabs(divisor);
-    dividend = myabs(dividend);
-    int quotient = 0;
-    while (divisor<=dividend){
-        quotient ++;
-        dividend -= divisor;
-    }
-    if (sgn)
-        return -quotient;
     return quotient;
 }
