@@ -552,15 +552,15 @@ int Solution::divide(int dividend, int divisor){
     int64_t _quotient=0;
     int Q = 0;
     int H=0;
-    int mod=0;
+    int64_t mod=0;
     for(int i=31;i>=0; i--){
         H = _dividend >> i & 1;
         mod = (mod << 1) + H;
         Q = mod >= _divisor? 1:0;
         mod = mod >= _divisor? mod-_divisor:mod;
-        //printf("dividend: %ld, divisor: %ld, H: %d, Q: %d\n",_dividend, _divisor, H, Q);
         _quotient = (_quotient << 1) + Q;
-        //printf("quotient: %ld\n",_quotient);
+        printf("dividend: %ld, divisor: %ld, H: %d, Q: %d, mod: %ld, quotient: %ld\n",_dividend, _divisor, 
+                H, Q, mod, _quotient);
     }
     if(sgn<0) _quotient = ~_quotient + 1;
     //printf("quotient: %ld\n",_quotient);
