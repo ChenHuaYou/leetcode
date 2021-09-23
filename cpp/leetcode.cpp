@@ -533,7 +533,17 @@ vector<int> kmp_table(string pattern){
 }
 
 // 转成2进制 1010 / 11 = ?
+// 补码
 int Solution::divide(int dividend, int divisor){
+    int sgn = 1;
+    if(dividend<0){
+        sgn = -sgn;
+        dividend = ~dividend + 1;
+    }
+    if(divisor<0){
+        sgn = -sgn;
+        divisor = ~divisor + 1;
+    }
     int quotient=0;
     int Q = 0;
     int H=0;
@@ -546,5 +556,6 @@ int Solution::divide(int dividend, int divisor){
         printf("dividend: %d, divisor: %d, H: %d, Q: %d\n",dividend, divisor, H, Q);
         quotient = (quotient << 1) + Q;
     }
+    if(sgn<0) quotient = ~quotient + 1;
     return quotient;
 }
